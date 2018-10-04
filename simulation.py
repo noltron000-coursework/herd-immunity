@@ -4,7 +4,7 @@ from person import Person
 from logger import Logger
 
 class Simulation(object):
-	'''
+'''
 	Main class that will run the herd immunity simulation program.  Expects initialization
 	parameters passed as command line arguments when file is run.
 
@@ -85,7 +85,7 @@ class Simulation(object):
 		# TODO: Create a Logger object and bind it to self.logger.  You should use this
 		# logger object to log all events of any importance during the simulation.  Don't forget
 		# to call these logger methods in the corresponding parts of the simulation!
-		self.logger = None
+		self.logger = Logger(self.file_name)
 
 		# This attribute will be used to keep track of all the people that catch
 		# the infection during a given time step. We'll store each newly infected
@@ -126,8 +126,8 @@ class Simulation(object):
 		# TODO: Complete this method!  This method should return True if the simulation
 		# should continue, or False if it should not.  The simulation should end under
 		# any of the following circumstances:
-		#     - The entire population is dead.
-		#     - There are no infected people left in the population.
+		# 	- The entire population is dead.
+		# 	- There are no infected people left in the population.
 		# In all other instances, the simulation should continue.
 		pass
 
@@ -174,6 +174,8 @@ class Simulation(object):
 		# that this doesn't happen.
 		assert person1.is_alive == True
 		assert random_person.is_alive == True
+
+		# pass an object (person1=chosen person2=random) into log_interaction instead of individual attributes
 
 		# The possible cases you'll need to cover are listed below:
 			# random_person is vaccinated:
