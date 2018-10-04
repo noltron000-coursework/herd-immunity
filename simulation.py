@@ -157,14 +157,14 @@ class Simulation(object):
 		# TODO: Finish this method!  This method should contain all the basic logic
 		# for computing one time step in the simulation.  This includes:
 			# - For each infected person in the population:
-			#        - Repeat for 100 total interactions:
-			#             - Grab a random person from the population.
-			#           - If the person is dead, continue and grab another new
-			#                 person from the population. Since we don't interact
-			#                 with dead people, this does not count as an interaction.
-			#           - Else:
-			#               - Call simulation.interaction(person, random_person)
-			#               - Increment interaction counter by 1.
+			#		- Repeat for 100 total interactions:
+			#			- Grab a random person from the population.
+			#				- If the person is dead:
+			#					- continue and grab another new person from the population.
+			#					- Since we don't interact with dead people, this does not count as an interaction.
+			#				- Else:
+			#					- Call simulation.interaction(person, random_person)
+			#					- Increment interaction counter by 1.
 			pass
 
 	def interaction(self, person, random_person):
@@ -177,14 +177,14 @@ class Simulation(object):
 
 		# The possible cases you'll need to cover are listed below:
 			# random_person is vaccinated:
-			#     nothing happens to random person.
+			# 	nothing happens to random person.
 			# random_person is already infected:
-			#     nothing happens to random person.
+			# 	nothing happens to random person.
 			# random_person is healthy, but unvaccinated:
-			#     generate a random number between 0 and 1.  If that number is smaller
-			#     than basic_repro_num, random_person's ID should be appended to
-			#     Simulation object's newly_infected array, so that their .infected
-			#     attribute can be changed to True at the end of the time step.
+			# 	generate a random number between 0 and 1.  If that number is smaller
+			# 	than basic_repro_num, random_person's ID should be appended to
+			# 	Simulation object's newly_infected array, so that their .infected
+			# 	attribute can be changed to True at the end of the time step.
 		# TODO: Remember to call self.logger.log_interaction() during this method!
 		pass
 
@@ -194,8 +194,8 @@ class Simulation(object):
 		# self.newly_infected, which should be filled with the IDs of every person
 		# created.  Iterate though this list.
 		# For every person id in self.newly_infected:
-		#   - Find the Person object in self.population that has this corresponding ID.
-		#   - Set this Person's .infected attribute to True.
+		# 	- Find the Person object in self.population that has this corresponding ID.
+		# 	- Set this Person's .infected attribute to True.
 		# NOTE: Once you have iterated through the entire list of self.newly_infected, remember
 		# to reset self.newly_infected back to an empty list!
 
