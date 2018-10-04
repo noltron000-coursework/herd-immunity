@@ -88,12 +88,12 @@ This is a big project.  There's no way that all the code you write is going to w
 For this project to be considered complete, you need to add your repo link to the course tracker. Please do not change the random seed set in the Simulation class! It is currently set to 42, and we will use this to double check that your simulation works and spits out the expected results.
 
 Your repo should contain:
-  * `Simulation`, `Person` and `Logger` classes and methods completed
-  * At least 2 log files generated from running your simulation
+* `Simulation`, `Person` and `Logger` classes and methods completed
+* At least 2 log files generated from running your simulation
 
 ### Stretch Challenges
 
 You'll find some of the smaller, individual stretch challenges contained with the comments of the code on the logger class.  Other stretch challenges include:
 
-  * Extending functionality so that we can test the spread of multiple viruses through a given population at the same time. (Difficulty Level: Hard)
-  * Create a Visualizer class that can spit out visualizations of the spread of the virus based on the log files of a simulation.  HINT: You'll want to use Matplotlib for visualization stuff, because its easy to use and generally awesome at this sort of thing.  You may also want to consider using a library like Pandas for organizing and cleaning your data in a more professional way, especially if you want to visualize answers to more complex questions.  Matplotlib and Pandas play very nicely together! (Difficulty Level: Medium)
+* Extending functionality so that we can test the spread of multiple viruses through a given population at the same time. (Difficulty Level: Hard)
+* Create a Visualizer class that can spit out visualizations of the spread of the virus based on the log files of a simulation.  HINT: You'll want to use Matplotlib for visualization stuff, because its easy to use and generally awesome at this sort of thing.  You may also want to consider using a library like Pandas for organizing and cleaning your data in a more professional way, especially if you want to visualize answers to more complex questions.  Matplotlib and Pandas play very nicely together! (Difficulty Level: Medium)
