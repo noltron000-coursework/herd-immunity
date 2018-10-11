@@ -10,7 +10,7 @@
 
 		__init__(self, file_name):
 
-		write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num):
+		write_metadata(self, pop_size, vaccination_rate, virus_name, mortality_rate, infection_rate):
 			- Writes the first line of a logfile, which will contain metadata on the parameters for the simulation.
 
 		log_interaction(self, person1, person2, did_infect=None, person2_vacc=None, person2_sick=None):
@@ -48,32 +48,32 @@ class Logger(object):
 	# NOTE: Since this is the first method called, it will create the text file that we will store all logs in. Be sure to use 'w' mode when you open the file.
 	# For all other methods, we'll want to use the 'a' mode to append our new log to the end, since 'w' overwrites the file.
 	# NOTE: Make sure to end every line with a '\n' character to ensure that each event logged ends up on a separate line!
-	def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num):
+	def write_metadata(self, pop_size, vaccination_rate, virus_name, mortality_rate, infection_rate):
 		# Open file from the simulation
 		with open(self.file_name, "w") as file:
 			# Write parameters to first line of file
-			file.write("{}\t{}\t{}\t{}\t{}\n").format(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num)
+			file.write("{}\t{}\t{}\t{}\t{}\n").format(pop_size, vaccination_rate, virus_name, mortality_rate, infection_rate)
 		# Close file when done
 		file.close()
 
 	# TODO: Finish this method. The Simulation object should use this method to log every interaction a sick individual has during each time step. This method should accomplish this by using the information from person1 (the infected person), person2 (the person randomly chosen for the interaction), and the optional keyword arguments passed into the method. See documentation for more info on the format of the logs that this method should write.
 	# NOTE:  You'll need to think about how the booleans passed (or not passed) represent all the possible edge cases!
 	# NOTE: Make sure to end every line with a '/n' character to ensure that each event logged ends up on a separate line!
-	def log_interaction(self, person1, person2, did_infect=None, person2_vacc=None, person2_sick=None):
+	def log_interaction(self, person1, person2, did_infect=None):
 		# Open file from the simulation
 		with open(self.file_name, "a") as file:
 			if did_infect:
 				# person 2 got infected!!!
-				file.write(str(person1.identity) +" infected " + str(person2.identity))
+				file.write("person# " + str(person1.identity) +" infected person# " + str(person2.identity))
 			elif person2.vaccinated:
 				# person 2 was vaccinated. Phew!
-				file.write("nothing happened to " + str(person2.identity))
+				file.write("nothing happened to person# " + str(person2.identity))
 			elif person2.infection:
 				# person 2 was already infected ;(
-				file.write("nothing happened to " + str(person2.identity))
+				file.write("nothing happened to person# " + str(person2.identity))
 			else:
 				# person 2 lucked out and didn't get infected O_O
-				file.write("nothing happened to " + str(person2.identity))
+				file.write("nothing happened to person# " + str(person2.identity))
 		file.close()
 
 	# TODO: Finish this method.  The Simulation object should use this method to log the results of every call of a Person object's .resolve_infection() method. ISSUE ON GITHUB
