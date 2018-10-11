@@ -17,7 +17,7 @@ Run Simulation:
 	call `self.run`
 		decides if simulation should continue.
 		eventually returns True or False based on helper function":
-		call `self._simulation_should_continue`
+		call `self.simulation_should_continue`
 			returns True if it should continue
 			returns False if it should not
 				only returns False if entire population is Dead or Uninfected
@@ -29,3 +29,4 @@ Run Simulation:
 			sets person's .infected attribute to True
 			empty the `self.newly_infected` list when finished
 
+## can a person be infected and vaccinated at the very beginning?

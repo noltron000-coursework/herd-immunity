@@ -65,7 +65,7 @@ class Logger(object):
 			if did_infect:
 				# person 2 got infected!!!
 				file.write(str(person1.identity) +" infected " + str(person2.identity))
-			elif person2.vaccination:
+			elif person2.vaccinated:
 				# person 2 was vaccinated. Phew!
 				file.write("nothing happened to " + str(person2.identity))
 			elif person2.infection:

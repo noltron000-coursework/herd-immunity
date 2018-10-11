@@ -30,20 +30,17 @@ import random
 
 class Person(object):
 
-	# TODO:  Finish this method. Follow the instructions in the class documentation
-	# to set the corret values for the following attributes.
-	def __init__(self, identity, vaccination, infection=None):
+	# TODO:  Finish this method. Follow the instructions in the class documentation to set the corret values for the following attributes.
+	def __init__(self, identity, vaccinated, infection=None):
 		self.alive = True
 		self.identity = identity
-		self.vaccination = vaccination
+		self.vaccinated = vaccinated
 		self.infection = infection
-
-
 
 	# TODO: Finish this method. Follow the instructions in the class documentation
 	# TODO: You will need to decide what parameters you pass into this method based on how you structure your class.
 	# For resolve_infection: If person dies, set is_alive to False and return False.
-	# If person lives, set is_vaccinated = True, infection = None, return True.
+	# If person lives, set vaccinated = True, infection = None, return True.
 	def resolve_infection(self): # OPEN ISSUE ON GITHUB
 		# This checks if infected people die.
 		print("is infected: " + str(self.infection))
@@ -52,8 +49,7 @@ class Person(object):
 		if self.infection != None:
 			print("uh-oh. infected!")
 
-			# Randomly determine if person dies,
-			# based on disease mortality rate.
+			# Randomly determine if person dies, based on disease mortality rate.
 			if random.random() < #mortality rate:
 				# Person dies.
 				print("person dies..")
@@ -63,7 +59,7 @@ class Person(object):
 			else:
 				# Person lives.
 				print("person lives!")
-				self.vaccination = True
+				self.vaccinated = True
 				self.infected = False
 				return True
 
