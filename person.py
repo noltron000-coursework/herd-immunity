@@ -35,8 +35,8 @@ class Person(object):
 	def __init__(self, identity, vaccination, infection=None):
 		self.alive = True
 		self.identity = identity
-		self.infection = infection
 		self.vaccination = vaccination
+		self.infection = infection
 
 
 
@@ -44,7 +44,7 @@ class Person(object):
 	# TODO: You will need to decide what parameters you pass into this method based on how you structure your class.
 	# For resolve_infection: If person dies, set is_alive to False and return False.
 	# If person lives, set is_vaccinated = True, infection = None, return True.
-	def resolve_infection(self):
+	def resolve_infection(self): # OPEN ISSUE ON GITHUB
 		# This checks if infected people die.
 		print("is infected: " + str(self.infection))
 

@@ -76,7 +76,7 @@ class Logger(object):
 				file.write("nothing happened to " + str(person2.identity))
 		file.close()
 
-	# TODO: Finish this method.  The Simulation object should use this method to log the results of every call of a Person object's .resolve_infection() method.
+	# TODO: Finish this method.  The Simulation object should use this method to log the results of every call of a Person object's .resolve_infection() method. ISSUE ON GITHUB
 	# If the person survives, did_die_from_infection should be False. Otherwise, did_die_from_infection should be True.  See the documentation for more details on the format of the log.
 	# NOTE: Make sure to end every line with a '/n' character to ensure that each event logged ends up on a separate line!
 	def log_infection_survival(self, person, did_die_from_infection):
