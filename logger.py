@@ -82,7 +82,7 @@ class Logger(object):
 			elif person2.vaccinated:
 				# person 2 was vaccinated. Phew!
 				file.write("vaccinated person # " + str(person2.identity) + " is protected\n")
-			elif person2.infection or new_infection:
+			elif person2.infected or new_infection:
 				# person 2 was already infected ;(
 				file.write("person # " + str(person2.identity) + " is already diseased\n")
 			else:
@@ -126,7 +126,7 @@ class Logger(object):
 			file.write("=========================\n\n")
 		file.close()
 
-	def log_results(self, time_step_number, total_infected, total_deaths, population_size):
+	def log_results(self, time_step_number, total_infected, total_deaths, population_size, population):
 		with open(self.file_name, "a") as file:
 			population_after = population_size - total_deaths
 			file.write("\n=========================\n")
@@ -136,6 +136,10 @@ class Logger(object):
 			file.write(f"finishing population: {population_after}\n")
 			file.write(f"  touched by disease: {total_infected}\n")
 			file.write(f"    number of deaths: {total_deaths}\n")
-			file.write("=========================")
+			file.write("=========================\n")
+			for person in self.population:
+				file.write(f"\n   identity: {person.identity}\n")
+				file.write(f"vaccination: {person.vaccinated}\n")
+				file.write(f"  infection: {person.infected}\n")
 
 		file.close()

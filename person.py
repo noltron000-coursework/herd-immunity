@@ -13,12 +13,12 @@ from logger import Logger
 		_____Methods_____:
 			- self.alive should be automatically set to true during instantiation.
 			- all other attributes for self should be set to their corresponding parameter passed during instantiation.
-			- If person is chosen to be infected for first round of simulation, then the object should create a Virus object and set it as the value for self.infection.  Otherwise, self.infection should be set to None.
+			- If person is chosen to be infected for first round of simulation, then the object should create a Virus object and set it as the value for self.infected.  Otherwise, self.infected should be set to None.
 
 		def __init__(self, _id, vaccinated, infection=None):
 			- self.alive should be automatically set to true during instantiation.
 			- all other attributes for self should be set to their corresponding parameter passed during instantiation.
-			- If person is chosen to be infected for first round of simulation, then the object should create a Virus object and set it as the value for self.infection.  Otherwise, self.infection should be set to None.
+			- If person is chosen to be infected for first round of simulation, then the object should create a Virus object and set it as the value for self.infected.  Otherwise, self.infected should be set to None.
 
 		did_survive_infection(self):
 			- Only called if infection attribute is not None.
@@ -26,7 +26,7 @@ from logger import Logger
 			- Generates a random number between 0 and 1.
 			- Compares random number to mortality_rate attribute stored in person's infection attribute.
 				- If random number is smaller, person has died from disease. alive is changed to false.
-				- If random number is larger, person has survived disease. Person's vaccinated attribute is changed to True, and set self.infection to None.
+				- If random number is larger, person has survived disease. Person's vaccinated attribute is changed to True, and set self.infected to None.
 '''
 
 class Person(object):
@@ -36,7 +36,7 @@ class Person(object):
 		self.alive = True
 		self.identity = identity
 		self.vaccinated = vaccinated
-		self.infection = infection
+		self.infected = infection
 
 	# TODO: Finish this method. Follow the instructions in the class documentation
 	# TODO: You will need to decide what parameters you pass into this method based on how you structure your class.
@@ -45,7 +45,7 @@ class Person(object):
 	def resolve_infection(self, mortality_rate): # OPEN ISSUE ON GITHUB
 		# This checks if infected people die.
 		# Check if person is infected.
-		if self.infection != None:
+		if self.infected != None:
 			# Randomly determine if person dies, based on disease mortality rate.
 			mortality_rand = random.random()
 			if mortality_rand < mortality_rate:
