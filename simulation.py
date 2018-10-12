@@ -46,9 +46,6 @@ class Simulation(object):
 		# number of (living) people at the start of the simulation.
 		self.population_size = population_size
 
-		# a list of every person in the entire population (living or dead).
-		self.population = []
-
 		# a list of each newly infected person from this step (living and to be infected)
 		self.newly_infected = []
 
@@ -78,6 +75,9 @@ class Simulation(object):
 
 		# The Contamination of the Virus
 		self.infection_rate = infection_rate
+
+		# a list of every person in the entire population (living or dead).
+		self.population = self.create_population()
 
 		# the FileName output file
 		self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(virus_name, population_size, vaccination_rate, initial_infected)
@@ -112,7 +112,7 @@ class Simulation(object):
 				TODO: Create all the infected people first, and then worry about the rest.
 				Don't forget to increment infected_count every time you create a new infected person!
 				'''
-				self.population += Person(self.next_person_id, False, self.virus_name)
+				self.population.append(Person(self.next_person_id, False, self.virus_name))
 				infected_count += 1
 			else:
 				'''
@@ -141,6 +141,7 @@ class Simulation(object):
 	In all other instances, the simulation should continue.
 	'''
 	def simulation_should_continue(self):
+		print()
 		print("checking if simulation should continue...")
 		end_death = None # simulation ends with everyone dead
 		end_alive = None # simulation ends with no alive infected
@@ -148,12 +149,14 @@ class Simulation(object):
 		# this for loop really is the important piece of this function.
 		# it determines if the end is neigh, for better or worse.
 		# if the end isn't neigh, the program will continue (return True)
+		print(self.population)
 		for person in self.population:
+			print("PERSON OBJECT:")
 			if person.alive:
-				print("found alive person")
+				print("is alive")
 				end_death = False # person is alive (not everyone dead)
 				if person.infected != None and person.vaccinated == False:
-					print("found alive sick unvaccinated person")
+					print("is alive sick unvaccinated")
 					end_alive = False # person is alive, vaccinated, and infected (infection continues)
 			if end_alive == False: # found a sick person. no need to continue the loop anymore.
 				break
