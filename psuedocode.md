@@ -26,7 +26,7 @@ Run Simulation:
 		go through `self.newly_infected`, a list of person ID's
 		for every person ID in `self.newly_infected`:
 			find person object in `self.population`
-			sets person's .infected attribute to True
+			sets person's .infection attribute to True
 			empty the `self.newly_infected` list when finished
 
 ## can a person be infected and vaccinated at the very beginning?
