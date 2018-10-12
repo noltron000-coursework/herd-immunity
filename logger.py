@@ -64,17 +64,23 @@ class Logger(object):
 		with open(self.file_name, "a") as file:
 			if did_infect:
 				# person 2 got infected!!!
-				file.write("person# " + str(person1.identity) +" infected person# " + str(person2.identity))
+				file.write("person # " + str(person1.identity) +" infected person # " + str(person2.identity) + "!\n")
 			elif person2.vaccinated:
 				# person 2 was vaccinated. Phew!
-				file.write("nothing happened to person# " + str(person2.identity))
+				file.write("nothing happened to person # " + str(person2.identity) + "\n")
 			elif person2.infection:
 				# person 2 was already infected ;(
-				file.write("nothing happened to person# " + str(person2.identity))
+				file.write("nothing happened to person # " + str(person2.identity) + "\n")
 			else:
 				# person 2 lucked out and didn't get infected O_O
-				file.write("nothing happened to person# " + str(person2.identity))
+				file.write("nothing happened to person # " + str(person2.identity) + "\n")
 		file.close()
+
+	def log_person(self, person):
+		with open(self.file_name, "a") as file:
+			file.write(f"\n----- person # {str(person.identity)} ------\n")
+		file.close()
+
 
 	# TODO: Finish this method.  The Simulation object should use this method to log the results of every call of a Person object's .resolve_infection() method. ISSUE ON GITHUB
 	# If the person survives, did_die_from_infection should be False. Otherwise, did_die_from_infection should be True.  See the documentation for more details on the format of the log.
@@ -85,10 +91,10 @@ class Logger(object):
 		# Mention whether or not each alive person dies at the end of an interaction cycle.
 			if did_die_from_infection:
 				# Person dies
-				file.write(str(person.identity) +" has died...\n")
+				file.write(f"{str(person.identity)} has died.....\n")
 			else:
 				# Person lives
-				file.write(str(person.identity) +" has survived!!!\n")
+				file.write(f"{str(person.identity)} has survived!\n")
 		file.close()
 
 
@@ -99,6 +105,9 @@ class Logger(object):
 		# Open file from the simulation
 		with open(self.file_name, "a") as file:
 			# Write that the cycle is complete, and that its starting a new one.
-			file.write("cycle number " + str(time_step_number) + "has ended.\n")
-			file.write("cycle number " + str(time_step_number + 1) + "is starting!\n")
+			file.write("\n=========================\n")
+			file.write("cycle # " + str(time_step_number) + " has ended...\n")
+			file.write("cycle # " + str(time_step_number + 1) + " is starting!\n")
+			file.write("=========================\n\n")
+
 		file.close()

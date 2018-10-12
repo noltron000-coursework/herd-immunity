@@ -22,7 +22,7 @@ Run Simulation:
 			returns False if it should not
 				only returns False if entire population is Dead or Uninfected
 
-	call `self.infect_newly_infected()`
+	call `self.contagiousify()`
 		go through `self.newly_infected`, a list of person ID's
 		for every person ID in `self.newly_infected`:
 			find person object in `self.population`

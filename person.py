@@ -50,7 +50,7 @@ class Person(object):
 			print("uh-oh. infected!")
 
 			# Randomly determine if person dies, based on disease mortality rate.
-			mortality_rand = random()
+			mortality_rand = random.random()
 			if mortality_rand < mortality_rate:
 				# Person dies.
 				print("person dies..")
