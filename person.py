@@ -1,4 +1,5 @@
 import random
+from logger import Logger
 # TODO: Import the virus class
 
 '''
@@ -43,25 +44,17 @@ class Person(object):
 	# If person lives, set vaccinated = True, infection = None, return True.
 	def resolve_infection(self, mortality_rate): # OPEN ISSUE ON GITHUB
 		# This checks if infected people die.
-		print("is infected: " + str(self.infection))
-
 		# Check if person is infected.
 		if self.infection != None:
-			print("uh-oh. infected!")
-
 			# Randomly determine if person dies, based on disease mortality rate.
 			mortality_rand = random.random()
 			if mortality_rand < mortality_rate:
 				# Person dies.
-				print("person dies..")
 				self.alive = False
 				return False
-
 			else:
 				# Person lives.
-				print("person lives!")
 				self.vaccinated = True
-				self.infection = False
 				return True
 
 		else:

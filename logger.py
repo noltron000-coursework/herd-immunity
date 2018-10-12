@@ -48,44 +48,58 @@ class Logger(object):
 	# NOTE: Since this is the first method called, it will create the text file that we will store all logs in. Be sure to use 'w' mode when you open the file.
 	# For all other methods, we'll want to use the 'a' mode to append our new log to the end, since 'w' overwrites the file.
 	# NOTE: Make sure to end every line with a '\n' character to ensure that each event logged ends up on a separate line!
-	def write_metadata(self, pop_size, vaccination_rate, virus_name, mortality_rate, infection_rate):
+	def write_metadata(self, population_size, vaccination_rate, virus_name, mortality_rate, infection_rate, initial_infected, num_interactions):
 		# Open file from the simulation
 		with open(self.file_name, "w") as file:
 			# Write parameters to first line of file
-			file.write("{}\t{}\t{}\t{}\t{}\n").format(pop_size, vaccination_rate, virus_name, mortality_rate, infection_rate)
+			file.write(f"{population_size}\t{vaccination_rate}\t{virus_name}\t{mortality_rate}\t{infection_rate}\n")
+			file.write("\n=========================\n")
+			file.write(f" population_size: {population_size}\n")
+			file.write(f"vaccination_rate: {vaccination_rate}\n")
+			file.write(f"      virus_name: {virus_name}\n")
+			file.write(f"  mortality_rate: {mortality_rate}\n")
+			file.write(f"  infection_rate: {infection_rate}\n")
+			file.write(f"initial_infected: {initial_infected}\n")
+			file.write(f"num_interactions: {num_interactions}\n\n")
+
 		# Close file when done
 		file.close()
 
 	# TODO: Finish this method. The Simulation object should use this method to log every interaction a sick individual has during each time step. This method should accomplish this by using the information from person1 (the infected person), person2 (the person randomly chosen for the interaction), and the optional keyword arguments passed into the method. See documentation for more info on the format of the logs that this method should write.
 	# NOTE:  You'll need to think about how the booleans passed (or not passed) represent all the possible edge cases!
 	# NOTE: Make sure to end every line with a '/n' character to ensure that each event logged ends up on a separate line!
-	def log_interaction(self, person1, person2, did_infect=None):
+	def log_interaction(self, person1, person2, newly_infected, did_infect=None):
 		# Open file from the simulation
+		new_infection = False
+		for person in newly_infected:
+			if person2 == person:
+				new_infection = True
+
 		with open(self.file_name, "a") as file:
 			if did_infect:
 				# person 2 got infected!!!
 				file.write("person # " + str(person1.identity) +" infected person # " + str(person2.identity) + "!\n")
 			elif person2.vaccinated:
 				# person 2 was vaccinated. Phew!
-				file.write("nothing happened to person # " + str(person2.identity) + "\n")
-			elif person2.infection:
+				file.write("vaccinated person # " + str(person2.identity) + " is protected\n")
+			elif person2.infection or new_infection:
 				# person 2 was already infected ;(
-				file.write("nothing happened to person # " + str(person2.identity) + "\n")
+				file.write("person # " + str(person2.identity) + " is already diseased\n")
 			else:
 				# person 2 lucked out and didn't get infected O_O
-				file.write("nothing happened to person # " + str(person2.identity) + "\n")
+				file.write("lucky person # " + str(person2.identity) + " didn't get sick\n")
 		file.close()
 
 	def log_person(self, person):
 		with open(self.file_name, "a") as file:
-			file.write(f"\n----- person # {str(person.identity)} ------\n")
+			file.write(f"\n------ person # {str(person.identity)} ------\n")
 		file.close()
 
 
 	# TODO: Finish this method.  The Simulation object should use this method to log the results of every call of a Person object's .resolve_infection() method. ISSUE ON GITHUB
 	# If the person survives, did_die_from_infection should be False. Otherwise, did_die_from_infection should be True.  See the documentation for more details on the format of the log.
 	# NOTE: Make sure to end every line with a '/n' character to ensure that each event logged ends up on a separate line!
-	def log_infection_survival(self, person, did_die_from_infection):
+	def log_infection_survival(self, did_die_from_infection):
 		# Open file from the simulation
 		with open(self.file_name, "a") as file:
 		# Mention whether or not each alive person dies at the end of an interaction cycle.
@@ -105,9 +119,23 @@ class Logger(object):
 		# Open file from the simulation
 		with open(self.file_name, "a") as file:
 			# Write that the cycle is complete, and that its starting a new one.
-			file.write("\n=========================\n")
-			file.write("cycle # " + str(time_step_number) + " has ended...\n")
+			if time_step_number != 0:
+				file.write("\n=========================\n")
+				file.write("cycle # " + str(time_step_number) + " has ended...\n")
 			file.write("cycle # " + str(time_step_number + 1) + " is starting!\n")
 			file.write("=========================\n\n")
+		file.close()
+
+	def log_results(self, time_step_number, total_infected, total_deaths, population_size):
+		with open(self.file_name, "a") as file:
+			population_after = population_size - total_deaths
+			file.write("\n=========================\n")
+			file.write("cycle # " + str(time_step_number) + " has ended...\n")
+			file.write("\n~~~~~~~~ RESULTS ~~~~~~~~\n")
+			file.write(f" starting population: {population_size}\n")
+			file.write(f"finishing population: {population_after}\n")
+			file.write(f"  touched by disease: {total_infected}\n")
+			file.write(f"    number of deaths: {total_deaths}\n")
+			file.write("=========================")
 
 		file.close()
