@@ -137,9 +137,4 @@ class Logger(object):
 			file.write(f"  touched by disease: {total_infected}\n")
 			file.write(f"    number of deaths: {total_deaths}\n")
 			file.write("=========================\n")
-			for person in self.population:
-				file.write(f"\n   identity: {person.identity}\n")
-				file.write(f"vaccination: {person.vaccinated}\n")
-				file.write(f"  infection: {person.infected}\n")
-
 		file.close()
