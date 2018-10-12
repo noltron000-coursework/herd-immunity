@@ -1,5 +1,5 @@
 import random, sys
-random.seed()
+random.seed(42)
 from person import Person
 from logger import Logger
 
@@ -255,8 +255,6 @@ class Simulation(object):
 					self.currently_infected
 			else:
 				continue
-		self.total_deaths = count_deaths
-		self.total_infected = count_infection
 		self.contagiousify()
 
 	# TODO: Finish this method! This method should be called any time two living people are selected for an interaction.  That means that only living people should be passed into this method.  Assert statements are included to make sure that this doesn't happen.
@@ -304,8 +302,9 @@ class Simulation(object):
 	'''
 
 	def contagiousify(self):
+		Logger.log_infection_kickoff(self)
 		for person in self.currently_infected:
-			person.resolve_infection(self.mortality_rate)
+			Logger.log_infection_survival(self, person, person.resolve_infection(self.mortality_rate))
 		for person in self.newly_infected:
 			person.infected = self.virus_name
 		self.currently_infected = self.newly_infected.copy()
@@ -332,7 +331,8 @@ if __name__ == "__main__":
 		print("Please input parameters")
 		print()
 		print("   type: integer, INPUT ≥ 1")
-		population_size = input("Enter population size: ")
+		population_size = int(input("Enter population size: "))
+
 
 		print()
 		print("   type: string")
@@ -340,15 +340,15 @@ if __name__ == "__main__":
 
 		print()
 		print("   type: float, 0 ≤ INPUT ≤ 1")
-		mortality_rate = input("Enter mortality rate: ")
+		mortality_rate = float(input("Enter mortality rate: "))
 
 		print()
 		print("   type: float, 0 ≤ INPUT ≤ 1")
-		infection_rate = input("Enter infection rate: ")
+		infection_rate = float(input("Enter infection rate: "))
 
 		print()
 		print("   type: float, 0 ≤ INPUT ≤ 1")
-		vaccination_rate = input("Enter vaccination rate: ")
+		vaccination_rate = float(input("Enter vaccination rate: "))
 
 		print()
 		print("default: 1")
@@ -357,6 +357,8 @@ if __name__ == "__main__":
 
 		if initial_infected == "":
 			initial_infected = 1
+		else:
+			initial_infected = int(initial_infected)
 
 		print()
 		print("default: 100")
@@ -365,6 +367,8 @@ if __name__ == "__main__":
 
 		if num_interactions == "":
 			num_interactions = 100
+		else:
+			num_interactions = int(num_interactions)
 
 	else:
 		population_size = int(params[0])

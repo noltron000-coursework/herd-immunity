@@ -79,10 +79,10 @@ class Logger(object):
 			if did_infect:
 				# person 2 got infected!!!
 				file.write("person # " + str(person1.identity) +" infected person # " + str(person2.identity) + "!\n")
-			elif person2.vaccinated:
+			elif person2.vaccinated == True:
 				# person 2 was vaccinated. Phew!
 				file.write("vaccinated person # " + str(person2.identity) + " is protected\n")
-			elif person2.infected or new_infection:
+			elif person2.infected != None or new_infection == True:
 				# person 2 was already infected ;(
 				file.write("person # " + str(person2.identity) + " is already diseased\n")
 			else:
@@ -96,19 +96,24 @@ class Logger(object):
 		file.close()
 
 
+	def log_infection_kickoff(self):
+		with open(self.file_name, "a") as file:
+			file.write("\n<><><> Computing Deaths <><><>\n\n")
+		file.close()
+
 	# TODO: Finish this method.  The Simulation object should use this method to log the results of every call of a Person object's .resolve_infection() method. ISSUE ON GITHUB
 	# If the person survives, did_die_from_infection should be False. Otherwise, did_die_from_infection should be True.  See the documentation for more details on the format of the log.
 	# NOTE: Make sure to end every line with a '/n' character to ensure that each event logged ends up on a separate line!
-	def log_infection_survival(self, did_die_from_infection):
+	def log_infection_survival(self, person, did_die_from_infection):
 		# Open file from the simulation
 		with open(self.file_name, "a") as file:
 		# Mention whether or not each alive person dies at the end of an interaction cycle.
-			if did_die_from_infection:
+			if not did_die_from_infection:
 				# Person dies
-				file.write(f"{str(person.identity)} has died.....\n")
+				file.write(f">>> person # {str(person.identity)} has died...rest in peace...\n")
 			else:
 				# Person lives
-				file.write(f"{str(person.identity)} has survived!\n")
+				file.write(f">>> person # {str(person.identity)} has survived the infection!\n")
 		file.close()
 
 
@@ -136,5 +141,5 @@ class Logger(object):
 			file.write(f"finishing population: {population_after}\n")
 			file.write(f"  touched by disease: {total_infected}\n")
 			file.write(f"    number of deaths: {total_deaths}\n")
-			file.write("=========================\n")
+			file.write("=========================")
 		file.close()
