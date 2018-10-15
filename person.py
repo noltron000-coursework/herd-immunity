@@ -1,4 +1,5 @@
 import random
+random.seed(42)
 from logger import Logger
 # TODO: Import the virus class
 
