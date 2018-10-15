@@ -59,4 +59,4 @@ class Person(object):
 
 		else:
 			# Person is not infected.
-			pass
+			return None
