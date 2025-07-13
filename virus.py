@@ -1,5 +1,7 @@
 class Virus(object):
-	'''Properties and attributes of the virus used in Simulation.'''
+	'''
+	Properties and attributes of the `Virus` used in the `Simulation`.
+	'''
 
 	def __init__(self, name, repro_rate, mortality_rate):
 		self.name = name
@@ -8,9 +10,14 @@ class Virus(object):
 
 
 def test_virus_instantiation():
-	#TODO: Create your own test that models the virus you are working with
-	'''Check to make sure that the virus instantiator is working.'''
+	'''
+	Check to make sure that the `Virus` instantiator is working.
+	'''
+
 	virus = Virus("HIV", 0.8, 0.3)
 	assert virus.name == "HIV"
 	assert virus.repro_rate == 0.8
 	assert virus.mortality_rate == 0.3
+
+	# TODO:
+	# Create your own tests that models the virus you are working with.
