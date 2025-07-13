@@ -12,7 +12,9 @@ class Person(object):
 		We start out with `is_alive = True`, because we don't make vampires or zombies.
 		All other values will be set by the simulation when it makes each Person object.
 
-		If person is chosen to be infected when the population is created, the simulation should instantiate a Virus object and set it as the value `self.infection`.
+		If person is chosen to be infected when the population is created,
+		then the simulation should instantiate a `Virus` object
+		and set it as the value of`self.infection`.
 		Otherwise, `self.infection` should be set to `None`.
 		'''
 
@@ -23,10 +25,10 @@ class Person(object):
 
 	def did_survive_infection(self):
 		'''
-		Generate a random number and compare to virus's `mortality_rate`.
+		Generate a random number and compare it to the `mortality_rate`.
 		If random number is smaller, `Person` dies from the disease.
-		If `Person` survives, they become vaccinated and they have no infection.
-		Return a boolean value indicating whether they survived the infection.
+		If the `Person` survives, then they become vaccinated, and they have no infection.
+		Return a boolean value indicating whether or not they survived the infection.
 		'''
 
 		# Only called if infection attribute is not None.
@@ -35,7 +37,9 @@ class Person(object):
 		# Should return a Boolean.
 		pass
 
-# These are simple tests to ensure that you are instantiating your `Person` class correctly.
+# The following functions are simple tests
+# to ensure that you are instantiating your `Person` class correctly.
+
 def test_vacc_person_instantiation():
 	# Create some people to test if our init method works as expected...
 	person = Person(1, True)
@@ -79,12 +83,16 @@ def test_did_survive_infection():
 	# Check if the `Person` survived or not.
 	if survived:
 		assert person.is_alive is True
+
 		# TODO:
-		# Write your own assert statements that test the values of each attribute for a `Person` who survived.
-		# assert ...
+		# Write your own assert statements that test the values of
+		# each attribute for a `Person` who survived.
+		assert False # Replace with something else.
+
 	else:
 		assert person.is_alive is False
+
 		# TODO:
-		# Write your own assert statements that test the values of each attribute for a `Person` who did not survive.
-		# assert ...
-		pass
+		# Write your own assert statements that test the values of
+		# each attribute for a `Person` who did not survive.
+		assert False # Replace with something else.
