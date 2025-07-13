@@ -16,7 +16,7 @@ class Simulation(object):
 	that can be set when the program is run.
 	'''
 
-	def __init__(self, pop_size, vacc_percentage, initial_infected=1, virus):
+	def __init__(self, pop_size, vacc_percentage, initial_infected, virus):
 		'''
 		Logger object logger records all events during the simulation.
 		Population represents all `Person` objects in the population.
@@ -134,7 +134,7 @@ class Simulation(object):
 
 		# TODO:
 		# Can you refactor this next line by using Python3's "f-string" format?
-		print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
+		print('The simulation has ended after {} turns.'.format(time_step_counter))
 
 	def time_step(self):
 		'''
@@ -211,7 +211,7 @@ class Simulation(object):
 if __name__ == "__main__":
 	params = sys.argv[1:]
 	virus_name = str(params[0])
-	repro_num = float(params[1])
+	repro_rate = float(params[1])
 	mortality_rate = float(params[2])
 
 	pop_size = int(params[3])
@@ -222,7 +222,7 @@ if __name__ == "__main__":
 	else:
 		initial_infected = 1
 
-	virus = Virus(name, repro_rate, mortality_rate)
+	virus = Virus(virus_name, repro_rate, mortality_rate)
 	sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
 
 	sim.run()
