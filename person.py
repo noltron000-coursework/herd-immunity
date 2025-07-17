@@ -1,5 +1,5 @@
 import random
-from Virus import Virus
+from virus import Virus
 
 class Person:
 	''' The simulation will contain people who will make up a population.'''
@@ -8,10 +8,9 @@ class Person:
 		''' We start out with is_alive = True
 		All other values will be set by the simulation through the parameters when it instantiates each Person object.
 		'''
-		self.is_alive = True #boolean
-		self.is_vaccinated = is_vaccinated #boolean
-		self.infection = infection #virus object
-
+		self.is_alive = True # boolean
+		self.is_vaccinated = is_vaccinated # boolean
+		self.infection = infection # virus object
 
 	def did_survive_infection(self):
 		''' Generate a random number between 0.0 and 1.0 and compare to the virus's mortality_num.
@@ -20,5 +19,5 @@ class Person:
 		Return True if they survived the infection and False if they did not.
 		'''
 
-		#TODO: finish this method
+		# TODO: finish this method
 		pass
