@@ -51,13 +51,13 @@ class Simulation:
 		self.logger = None # Replace with `Logger` object
 
 		# TODO:
-		# Call `self._create_population()` and pass in the correct parameters.
+		# Call `self.create_population()` and pass in the correct parameters.
 		# Store the array that this method will return in the `self.population` attribute.
 		self.population = [] # List of `Person` objects
 
 		# TODO:
 		# Store each newly infected person's ID in newly_infected attribute.
-		# At the end of each time step, call `self._infect_newly_infected()`
+		# At the end of each time step, call `self.infect_newly_infected()`
 		# and then reset `.newly_infected` back to an empty list.
 		self.newly_infected = [] # List of `Person` objects
 
@@ -76,7 +76,7 @@ class Simulation:
 		self.total_dead = 0 #  integer number
 
 
-	def _create_population(self, initial_infected):
+	def create_population(self, initial_infected):
 		'''
 		This method will create the initial population (a list of `Person` objects)
 		consisting of initial infected people,initial healthy non-vaccinated people,
@@ -104,7 +104,7 @@ class Simulation:
 		# that has the correct intial vaccination percentage and initial infected.
 		pass
 
-	def _simulation_should_continue(self):
+	def simulation_should_continue(self):
 		'''
 		The simulation should only end if the entire population is dead,
 		or if the virus has been eradicated (through death and vaccination).
@@ -118,7 +118,7 @@ class Simulation:
 		# Returns a Boolean.
 		pass
 
-	def _infect_newly_infected(self):
+	def infect_newly_infected(self):
 		'''
 		This method should iterate through the list of `._id` stored
 		in `self.newly_infected`, and update each `Person` object with the disease.
@@ -139,7 +139,7 @@ class Simulation:
 		# TODO:
 		# Finish this method.
 		# To simplify the logic here, use the helper method
-		# `_simulation_should_continue()` to tell us whether or not we should continue
+		# `simulation_should_continue()` to tell us whether or not we should continue
 		# the simulation and run at least 1 more `time_step`.
 
 		# TODO:
@@ -152,7 +152,7 @@ class Simulation:
 		# Set this variable using a helper...
 		time_step_counter = 0
 
-		while self._simulation_should_continue():
+		while self.simulation_should_continue():
 			# TODO:
 			# for every iteration of this loop, call `self.time_step()`
 			# to compute another round of this simulation.
