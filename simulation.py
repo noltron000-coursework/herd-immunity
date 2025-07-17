@@ -210,19 +210,23 @@ class Simulation(object):
 
 if __name__ == "__main__":
 	params = sys.argv[1:]
+
+	# Virus properties
 	virus_name = str(params[0])
-	repro_rate = float(params[1])
+	reproduction_rate = float(params[1])
 	mortality_rate = float(params[2])
 
-	pop_size = int(params[3])
-	vacc_percentage = float(params[4])
+	# Population properties
+	population_size = int(params[3])
+	vaccination_rate = float(params[4])
 
 	if len(params) == 6:
-		initial_infected = int(params[5])
+		initial_infections = int(params[5])
 	else:
-		initial_infected = 1
+		initial_infections = 1
 
-	virus = Virus(virus_name, repro_rate, mortality_rate)
-	sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
-
-	sim.run()
+	# Create Virus class instance...
+	virus = Virus(virus_name, reproduction_rate, mortality_rate)
+	# Create Simulation class instance using new virus.
+	simulation = Simulation(population_size, vaccination_rate, initial_infections, virus)
+	simulation.run()
