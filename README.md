@@ -2,6 +2,10 @@
 We're going to create a basic simulation of *Herd Immunity* by modeling how a virus moves
 through a population where some (but not all) of a population is vaccinated against this virus.
 
+> #### Nolt's Note
+> *This project final was originally created (at least) a couple years before the COVID-19 pandemic.*
+> *It's aged quite well; the project is even more fitting to learn with, thanks to some serious retrospective.*
+
 This <dfn title='A "README" is a commonly-named file for project details.'>README</dfn> is a draft to help you
 get started on the project and will be updated with more detail as we improve the project and answer questions.
 
@@ -76,7 +80,22 @@ Set up your local clone of this project repo on your computer.
 1. **Push your commits** to your remote GitHub repo when you want to publish and backup your code:
 	`git push` (the `-u` in the previous command lets you omit `origin main` afterward).
 
-**Let's get coding!**
+> #### *Cloning* vs *Forking*
+> You may either **clone** or **fork** this repository, as either achieves similar results.
+> The difference between cloning and forking usually has to do with intention:
+> If you **fork** the repository into a new one, usually you intend to merge it back into the original repository.
+> If you **clone** the repository into a new one, usually you intend to diverge from the original repository.
+>
+> On *GitHub*, *forking* will not count towards your commit streak,
+> but will neatly and automatically link to the original repository.
+> *cloning*, on the other hand, will count towards your commit streak,
+> but it will not automatically link the original repository.
+>
+> Therefore, if you are seeking to complete this challenge project, you'll likely want to *clone* it.
+> You will want to *fork* it if you find any errors in the code that you
+> or if you want to suggest edits to this <kbd>README.md</kbd> file.
+
+***Let's get coding!***
 You'll find instructions for what you need to do marked within the files themselves.
 Anything that you explicitly need to code should be marked with a comment that starts with `# TODO`.
 
@@ -127,6 +146,7 @@ Instead, get out a piece of paper or a whiteboard and try to diagram what needs 
 and when using each of the objects and methods.
 Draw out the data flow.
 
+### Ask for Help
 *If you don't understand something, talk to your classmates and ask for help!*
 
 Ask your classmates and teachers for clarification/help/code reviews as needed, or drop in to tutoring hours.
@@ -134,12 +154,13 @@ Share your questions and insights in the course Slack channel,
 or book some time to get help from Justin and Phyllis, the course teaching assistants.
 Collaboration is encouraged, but be sure that you typed in all the code yourself and the final project is your own!
 
+### Make Discourse on Bugs
 *Found a bug or a problem? Contact the course instructors or teaching assistants!*
 
-> #### Editor's Note
+> #### Author's Note
 > The template code was written in a cottage on the coast of Ireland with spotty power
 > during the strongest hurricane Ireland has seen in 61 years.
-> *(This is 100% true!)*
+> *(Alan's Note: This is 100% true!)*
 >
 > ***So...* there are probably some bugs in the template code**.
 
@@ -147,7 +168,7 @@ If you think something doesn't make sense, double check with your classmates and
 If you feel the need to modify the template code to make it work another way, that's totally fine!
 The template code is there to help you, but it isn't a requirement that you use all of it.
 
-### Write Tests!
+### Write Tests!!!
 This is a big project.
 There's no way that all the code you write is going to work the first time.
 
@@ -165,6 +186,7 @@ Please do not change the random seed set in the Simulation class!
 It is currently set to 42, and we will use this to double check that your simulation works
 and spits out the expected results.
 
+### Requirements
 **Your repo should contain:**
 - Completed classes for <kbd>logger.py</kbd>, <kbd>simulation.py</kbd>, and <kbd>person.py</kbd>.
 - The addition of at least 2 additional tests to the <kbd>virus.py</kbd> file.
