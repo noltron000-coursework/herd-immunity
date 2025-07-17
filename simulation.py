@@ -15,7 +15,7 @@ class Simulation:
 	that can be set when the program is run.
 	'''
 
-	def __init__(self, pop_size, vacc_percentage, initial_infected, virus):
+	def __init__(self, population_size, vaccination_rate, initial_infected, virus):
 		'''
 		Logger object logger records all events during the simulation.
 		Population represents all `Person` objects in the population.
@@ -35,34 +35,46 @@ class Simulation:
 		HINT:
 		Look in the if `__name__ == "__main__"` function at the bottom.
 		'''
+
+		# HINT:
+		# This virus property contains a lot of relevant data for later...
+		self.virus = virus # `Virus` object
+
+		# TODO:
+		# Can you refactor this next line by using Python3's "f-string" format?
+		self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(virus_name, population_size, vaccination_rate, initial_infected)
+
 		# TODO:
 		# Create a Logger object and bind it to `self.logger`.
 		# Remember to call the appropriate logger method
 		# in the corresponding parts of the simulation.
+		self.logger = None # Replace with `Logger` object
 
 		# TODO:
 		# Call `self._create_population()` and pass in the correct parameters.
 		# Store the array that this method will return in the `self.population` attribute.
+		self.population = [] # List of `Person` objects
 
 		# TODO:
 		# Store each newly infected person's ID in newly_infected attribute.
 		# At the end of each time step, call `self._infect_newly_infected()`
 		# and then reset `.newly_infected` back to an empty list.
-		self.logger = None
-		self.population = [] # List of `Person` objects
-		self.pop_size = pop_size # Int
-		self.next_person_id = 0 # Int
-		self.virus = virus # Virus object
-		self.initial_infected = initial_infected # Int
-		self.total_infected = 0 # Int
-		self.current_infected = 0 # Int
-		self.vacc_percentage = vacc_percentage # float between 0 and 1
-		self.total_dead = 0 # Int
-		self.newly_infected = []
+		self.newly_infected = [] # List of `Person` objects
+
+		self.population_size = population_size #  integer number
+		self.initial_infected = initial_infected #  integer number
+		self.vaccination_rate = vaccination_rate # float number between 0 and 1
 
 		# TODO:
-		# Can you refactor this next line by using Python3's "f-string" format?
-		self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(virus_name, population_size, vacc_percentage, initial_infected)
+		# Some of these properties might not be needed.
+		# These are just some suggestions for you!
+		# You can add more or remove all of these, just do
+		# what you think is right to organize your solution.
+		self.next_person_id = 0 # integer number
+		self.current_infected = 0 #  integer number
+		self.total_infected = 0 #  integer number
+		self.total_dead = 0 #  integer number
+
 
 	def _create_population(self, initial_infected):
 		'''
@@ -92,20 +104,6 @@ class Simulation:
 		# that has the correct intial vaccination percentage and initial infected.
 		pass
 
-	# HINT:
-	# You may wish to implement new helper methods that you make up yourself,
-	# to help organize your thoughts and to help simplify your code elsewhere.
-
-	def print_population(self):
-		'''Prints out every person in the population and their current attributes.'''
-		# NOTE: This is an example of a method that you could implement, if you find it useful!
-		pass
-
-	def get_infected(self):
-		'''Gets all the infected people from the population and returns them as a list.'''
-		# NOTE: This is an example of a method that you could implement, if you find it useful!
-		pass
-
 	def _simulation_should_continue(self):
 		'''
 		The simulation should only end if the entire population is dead,
@@ -118,6 +116,19 @@ class Simulation:
 		# TODO:
 		# Complete this helper method.
 		# Returns a Boolean.
+		pass
+
+	def _infect_newly_infected(self):
+		'''
+		This method should iterate through the list of `._id` stored
+		in `self.newly_infected`, and update each `Person` object with the disease.
+		'''
+		# TODO:
+		# Call this method at the end of every time step and infect each `Person`.
+
+		# TODO:
+		# Once you have iterated through the entire list of `self.newly_infected`,
+		# remember to reset `self.newly_infected` back to an empty list.
 		pass
 
 	def run(self):
@@ -213,17 +224,20 @@ class Simulation:
 		# Call slogger method during this method.
 		pass
 
-	def _infect_newly_infected(self):
-		'''
-		This method should iterate through the list of `._id` stored
-		in `self.newly_infected`, and update each `Person` object with the disease.
-		'''
-		# TODO:
-		# Call this method at the end of every time step and infect each `Person`.
+	# HINT:
+	# You may wish to implement new helper methods that you make up yourself,
+	# to help organize your thoughts and to help simplify your code elsewhere.
 
-		# TODO:
-		# Once you have iterated through the entire list of `self.newly_infected`,
-		# remember to reset `self.newly_infected` back to an empty list.
+	def print_population(self):
+		'''Prints out every person in the population and their current attributes.'''
+		# NOTE:
+		# This is an example of a method that you could implement, if you find it useful!
+		pass
+
+	def get_infected(self):
+		'''Gets all the infected people from the population and returns them as a list.'''
+		# NOTE:
+		# This is an example of a method that you could implement, if you find it useful!
 		pass
 
 
