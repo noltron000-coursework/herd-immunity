@@ -88,14 +88,17 @@ in the following order, separated by spaces:
 {optional: number of people initially infected (default is 1)}`
 
 Let's look at an example:
-- Virus Name: Ebola
-- Reproduction Rate: 25%
-- Mortality Rate: 70%
-- Population Size: 100,000
-- Vaccination Rate: 90%
-- Initial Number of Infections: 10
 
-Then you would type: <br />
+|                              |         |
+| ---------------------------- | ------- |
+| Virus Name                   | Ebola   |
+| Reproduction Rate            | 25%     |
+| Mortality Rate               | 70%     |
+| Population Size              | 100,000 |
+| Vaccination Rate             | 90%     |
+| Initial Number of Infections | 10      |
+
+For this example, you would type: <br />
 `python3 simulation.py Ebola 0.25 0.70 100000 0.90 10` <br />
 into the terminal.
 
