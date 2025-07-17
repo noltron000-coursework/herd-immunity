@@ -9,7 +9,21 @@ through a population where some (but not all) of a population is vaccinated agai
 This <dfn title='A "README" is a commonly-named file for project details.'>README</dfn> is a draft to help you
 get started on the project and will be updated with more detail as we improve the project and answer questions.
 
-## Goals
+## Learning Outcomes
+By completing this project, you should be able to...
+
+1. Applying functions, scope, conditionals, loops, lists, OOP, and file I/O
+1. Practice reading spec, code comments, and starter code
+1. Practice writing basic tests and running them
+
+## Basic Structure
+The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`.
+- `Simulation`: The main class that runs the entire simulation.
+- `Person`: Represents the people that make up the population that the virus is spreading through.
+- `Virus`: Models the properties of the virus we wish to simulate.
+- `Logger`: A helper class for writing the results of the simulation to a file.
+
+## Project Goals
 - Finish the code in these files to create a working simulation that creates log files of major events.
 - Design your program to follow the rules of the simulation.
 - Get your data for virus name, mortality rate, and reproductive rate from [this article](how-ebola-compares).
@@ -195,6 +209,25 @@ and spits out the expected results.
 - <kbd>simulation_test.py</kbd> file should be created that allows for testing the simulation.
 - <kbd>logger_test.py</kbd> file should be created that allows for the testing of the logger class.
 - Answers to the questions asked above listed in a file named <kbd>answers.txt</kbd>.
+
+<!--
+NOTE: Some of these sections are a little messy from merging unrelated diffs.
+TODO: Let's dedupe the *Requirements* and *Additional Requirements* sections.
+--->
+
+### Additional Requirements
+1. You will need to complete the following method inside the Person class (more details in the starter code):
+	- `did_survive_infection:` checks wheter the person survived the infection based on the mortality rate
+1. You will need to complete the following methods inside the Simulation class (more details in the starter code):
+	- `print_population:` prints out each person in the population
+	- `get_infected:` returns a list of all the infected people in the population
+	- `simulation_should_continue:` determines whether the simulation should continue based on the state of the population
+	- `determine_survival:` checks if each of the current infected died or survived and became vaccinated, occurs after each time step
+	- `time_step:` this is where the interactions between an infected person and a random person from the population will be called
+	- `interaction:` this is where a random person may become infected or vaccinated
+1. The Virus and FileWriter classes have already been completed.
+1. You will need to write two or more pieces of test code for any part of the program, using pytest is optional.
+1. You will also need to submit two result files simulating a population of 10 and then a population of 100. You are free to make up any virus's you choose.
 
 ### Stretch Challenges
 You'll find some of the smaller, individual stretch challenges

@@ -2,9 +2,9 @@ import random
 random.seed(42)
 from virus import Virus
 
-class Person(object):
+class Person:
 	'''
-	Person objects will populate the simulation.
+	The simulation will contain people, who make up a population.
 	'''
 
 	def __init__(self, _id, is_vaccinated, infection=None):

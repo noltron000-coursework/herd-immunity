@@ -4,8 +4,7 @@ from person import Person
 from logger import Logger
 from virus import Virus
 
-
-class Simulation(object):
+class Simulation:
 	'''
 	Main class that will run the herd immunity simulation program.
 	Expects initialization parameters passed as command line arguments when file is run.
@@ -67,7 +66,10 @@ class Simulation(object):
 
 	def _create_population(self, initial_infected):
 		'''
-		This method will create the initial population.
+		This method will create the initial population (a list of `Person` objects)
+		consisting of initial infected people,initial healthy non-vaccinated people,
+		and initial healthy vaccinated people.
+		Be sure to add them all to the population list!
 
 		Args:
 			initial_infected (int):
@@ -90,14 +92,28 @@ class Simulation(object):
 		# that has the correct intial vaccination percentage and initial infected.
 		pass
 
+	# HINT:
+	# You may wish to implement new helper methods that you make up yourself,
+	# to help organize your thoughts and to help simplify your code elsewhere.
+
+	def print_population(self):
+		'''Prints out every person in the population and their current attributes.'''
+		# NOTE: This is an example of a method that you could implement, if you find it useful!
+		pass
+
+	def get_infected(self):
+		'''Gets all the infected people from the population and returns them as a list.'''
+		# NOTE: This is an example of a method that you could implement, if you find it useful!
+		pass
+
 	def _simulation_should_continue(self):
 		'''
-		The simulation should only end if the entire
-		population is dead, or everyone is vaccinated.
+		The simulation should only end if the entire population is dead,
+		or if the virus has been eradicated (through death and vaccination).
 
 		Returns:
 			bool:
-				True for simulation should continue, `False` if it should end.
+				`True` for simulation should continue, `False` if it should end.
 		'''
 		# TODO:
 		# Complete this helper method.
@@ -124,9 +140,8 @@ class Simulation(object):
 		# TODO:
 		# Set this variable using a helper...
 		time_step_counter = 0
-		should_continue = None
 
-		while should_continue:
+		while self._simulation_should_continue():
 			# TODO:
 			# for every iteration of this loop, call `self.time_step()`
 			# to compute another round of this simulation.
@@ -149,10 +164,14 @@ class Simulation(object):
 			this does not count as an interaction.)
 		3. Otherwise call `simulation.interaction(person, random_person)`
 			and increment interaction counter by +1.
+		4. You can also determine how many die from their infections
+			at the end of each call of `self.time_step()`.
 		'''
 
 		# TODO:
 		# Finish this method.
+		# HINT:
+		# Newly infected people cannot die in the same step that they were infected in!
 		pass
 
 	def interaction(self, person, random_person):

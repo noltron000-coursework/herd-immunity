@@ -1,6 +1,6 @@
 class Logger(object):
 	'''
-	Utility class responsible for logging all interactions during the simulation.
+	Utility class responsible for logging simulation interactions to a file.
 	'''
 
 	# TODO:
@@ -36,13 +36,37 @@ class Logger(object):
 		# It should create the text file that we will store all logs in.
 
 		# TIP:
-		# Use 'w' mode when you open the file.
-		# For all other methods, use the 'a' mode to append a new log to the end,
-		# since 'w' overwrites the file.
+		# Use 'w' mode when you open the file to overwrite the old data with the new.
+		# For all other methods, use the 'a' mode to append a new log to the end.
+
+		results_file = open(self.file_name, "w")
+
+		results_file.write(f"Simulation for virus: {virus_name}")
+		results_file.write("More content...!")
+		results_file.write("More content...!")
+		results_file.write("More content...!")
+
+		results_file.close()
 
 		# NOTE:
 		# Make sure to end every line with a '/n' character
 		# to ensure that each event logged ends up on a separate line!
+		pass
+
+	def log_results(self):
+		'''
+		Logs the results of the simulation to the file.
+		Should include at least three strings:
+		- "Simulation ended after {num_turns} turns."
+		- "Total Dead: {num_deaths}."
+		- "Total Vaccinated: {num_vaccinated}."
+		'''
+
+		# TODO:
+		# Complete this method.
+
+		# TIP:
+		# You will have to add or change parameters for some functions in this project!
 		pass
 
 	def log_interaction(
