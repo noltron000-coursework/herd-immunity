@@ -1,7 +1,7 @@
 import random
 from person import Person
 from virus import Virus
-from file_writer import FileWriter
+from logger import Logger
 
 class Simulation:
 
@@ -21,7 +21,7 @@ class Simulation:
 		self.total_dead = 0
 		self.total_vaccinated = initial_vaccinated
 
-		self.file_writer = FileWriter(resultsfilename)
+		self.logger = Logger(resultsfilename)
 
 
 	def create_population(self):
@@ -71,7 +71,7 @@ class Simulation:
 		time_step_counter = 0
 		should_continue = True
 
-		self.file_writer.init_file(self.virus, self.population_size, self.initial_vaccinated, self.initial_healthy, self.initial_infected)
+		self.logger.init_file(self.virus, self.population_size, self.initial_vaccinated, self.initial_healthy, self.initial_infected)
 
 		# keep looping until the simulation ends
 		while self.simulation_should_continue():
@@ -85,7 +85,7 @@ class Simulation:
 			time_step_counter += 1
 
 		print(f'The simulation has ended after {time_step_counter} turns.')
-		self.file_writer.write_results(time_step_counter, self.total_dead, self.total_vaccinated)
+		self.logger.log_results(time_step_counter, self.total_dead, self.total_vaccinated)
 
 	def determine_survival(self, infected):
 		'''Check if the current infected people survive their infection
