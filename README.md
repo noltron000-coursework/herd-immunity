@@ -42,16 +42,16 @@ The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `FileWri
 
 3. The Virus and FileWriter classes have already been completed.
 
-4. You will need to write two or more pieces of test code for any part of the program, using pytest is optional. 
+4. You will need to write two or more pieces of test code for any part of the program, using pytest is optional.
 
 5. You will also need to submit two result files simulating a population of 10 and then a population of 100. You are free to make up any virus's you choose.
 
 ## Project Submission
 
-This project will be done via pair programming with randomly assinged pairs. In order successfully pass this project you will need to fill out the corresponding project rubric. 
-One partner will submit the project github repo link on trinket by the deadline and indicate who their partner was as well. 
+This project will be done via pair programming with randomly assinged pairs. In order successfully pass this project you will need to fill out the corresponding project rubric.
+One partner will submit the project github repo link on trinket by the deadline and indicate who their partner was as well.
 
 ### Stretch Challenges
 
-  * Extending functionality so that we can test the spread of multiple viruses through a given population at the same time. (Difficulty Level: Hard)
-  * Create a Visualizer class that can spit out visualizations of the spread of the virus based on the log files of a simulation.  HINT: You'll want to use Matplotlib for visualization stuff, because its easy to use and generally awesome at this sort of thing.  You may also want to consider using a library like Pandas for organizing and cleaning your data in a more professional way, especially if you want to visualize answers to more complex questions.  Matplotlib and Pandas play very nicely together! (Difficulty Level: Medium)
+* Extending functionality so that we can test the spread of multiple viruses through a given population at the same time. (Difficulty Level: Hard)
+* Create a Visualizer class that can spit out visualizations of the spread of the virus based on the log files of a simulation.  HINT: You'll want to use Matplotlib for visualization stuff, because its easy to use and generally awesome at this sort of thing.  You may also want to consider using a library like Pandas for organizing and cleaning your data in a more professional way, especially if you want to visualize answers to more complex questions.  Matplotlib and Pandas play very nicely together! (Difficulty Level: Medium)
