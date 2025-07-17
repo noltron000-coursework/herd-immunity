@@ -8,7 +8,7 @@ get started on the project and will be updated with more detail as we improve th
 ## Goals
 - Finish the code in these files to create a working simulation that creates log files of major events.
 - Design your program to follow the rules of the simulation.
-- Get your data for virus name, mortality rate, and reproductive rate from [this Guardian article](how-ebola-compares).
+- Get your data for virus name, mortality rate, and reproductive rate from [this article](how-ebola-compares).
 - During every time step of the simulation, **every sick person**
 	should randomly interact with **100 other people** in the population.
 	The chance of a sick person infecting a person that they interact with is the virus's reproductive rate.
@@ -51,30 +51,30 @@ Once you have successfully run a simulation, use your python skills to answer to
 *in a file called <kbd>answers.txt</kbd> and commit this to your repo.*
 
 ## Getting Started
-**Important:**
-Please follow these instructions *exactly*. If you skip a step or do them out of order,
-it may not work correctly or you may not earn credit towards your GitHub commit streak.
+Please follow these instructions *exactly*.
+If you skip a step or do them out of order, it may not work correctly,
+or you may not earn credit towards your GitHub commit streak. wnat to fix, for example,
 
 ### Repository Setup
 Set up your local clone of this project repo on your computer.
 
-1. **Clone** (do not *fork*) this repo on GitHub onto your local computer.
-	- First open your terminal and navigate into the folder where you keep your projects:
-		`cd ~/MakeSchool/Projects` (or something similar for your folders)
-	- Then run this command to *clone* the course repo:
-		`git clone https://github.com/Make-School-Labs/Herd-Immunity-Simulation.git`
-	- Now navigate into the new folder Git just created:
-		`cd Herd-Immunity-Simulation`
-1. [**Create a new empty repo** on GitHub](https://github.com/new) also named `Herd-Immunity-Simulation`
+1. **Clone** (do not *fork*) **this repo** from GitHub onto your local computer.
+	1. First, open your terminal and navigate into the folder where you keep your projects:
+		`cd ~/developer/projects/` (or something similar for your folders).
+	1. Then, run this command to *clone* the course repo:
+		`git clone https://github.com/remake-school/cs-101-project-herd-immunity-simulation herd-immunity-simulation`
+	1. Finally, navigate into the new folder Git just created:
+		`cd herd-immunity-simulation`
+1. [**Create a new empty repo** on GitHub](https://github.com/new) also named `cs-101-project-herd-immunity-simulation`,
 	and **do not** initialize it with a README.
 	(Creating a *new* repo instead of a *fork* allows you to earn credit towards your GitHub commit streak.)
 1. **Set the `origin` remote's URL** on your local repo to point to your new repo on GitHub:
-	`git remote set-url origin https://github.com/<your-username>/Herd-Immunity-Simulation.git`
-1. **Push your local repo** to your *remote* GitHub repo to link your `master` branch to your `origin` remote:
-	`git push -u origin master`
+	`git remote set-url origin https://github.com/<your-github-username>/cs-101-project-herd-immunity-simulation.git`
+1. **Push your local repo** to your *remote* GitHub repo to link your `main` branch to your `origin` remote:
+	`git push -u origin main`
 1. **Commit your code** to your local repo frequently (each time you've made meaningful progress).
 1. **Push your commits** to your remote GitHub repo when you want to publish and backup your code:
-	`git push` (the `-u` in the previous command lets you omit `origin master` afterward).
+	`git push` (the `-u` in the previous command lets you omit `origin main` afterward).
 
 **Let's get coding!**
 You'll find instructions for what you need to do marked within the files themselves.
@@ -95,9 +95,9 @@ Let's look at an example:
 - Reproduction Rate: 25%
 - People Initially Infected: 10
 
-Then I would type:
-<br />
-`python3 simulation.py 100000 0.90 Ebola 0.70 0.25 10` in the terminal.
+Then you would type: <br />
+`python3 simulation.py 100000 0.90 Ebola 0.70 0.25 10` <br />
+into the terminal.
 
 ## Basic Structure
 The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`.
