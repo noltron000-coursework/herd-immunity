@@ -1,12 +1,17 @@
-class Virus(object):
+class Virus:
 	'''
-	Properties and attributes of the `Virus` used in the `Simulation`.
+	Represents the virus that will be used
+	to infect people within the `Simulation` class.
 	'''
-
-	def __init__(self, name, repro_rate, mortality_rate):
-		self.name = name
-		self.repro_rate = repro_rate
-		self.mortality_rate = mortality_rate
+	def __init__(self, name, reproduction_rate, mortality_rate):
+		'''
+		Sets up the virus to include its name,
+		the reproduction rate that controls how infectious it is,
+		and the mortality rate representing how deadly it is.
+		'''
+		self.name = name # a string
+		self.reproduction_rate = reproduction_rate # a float number between 0.0 and 1.0
+		self.mortality_rate = mortality_rate # a float number between 0.0 and 1.0
 
 
 def test_virus_instantiation():
@@ -16,7 +21,7 @@ def test_virus_instantiation():
 
 	virus = Virus("HIV", 0.8, 0.3)
 	assert virus.name == "HIV"
-	assert virus.repro_rate == 0.8
+	assert virus.reproduction_rate == 0.8
 	assert virus.mortality_rate == 0.3
 
 	# TODO:

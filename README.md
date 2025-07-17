@@ -9,7 +9,21 @@ through a population where some (but not all) of a population is vaccinated agai
 This <dfn title='A "README" is a commonly-named file for project details.'>README</dfn> is a draft to help you
 get started on the project and will be updated with more detail as we improve the project and answer questions.
 
-## Goals
+## Learning Outcomes
+By completing this project, you should be able to...
+
+1. Applying functions, scope, conditionals, loops, lists, OOP, and file I/O
+1. Practice reading spec, code comments, and starter code
+1. Practice writing basic tests and running them
+
+## Basic Structure
+The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`.
+- `Simulation`: The main class that runs the entire simulation.
+- `Person`: Represents the people that make up the population that the virus is spreading through.
+- `Virus`: Models the properties of the virus we wish to simulate.
+- `Logger`: A helper class for writing the results of the simulation to a file.
+
+## Project Goals
 - Finish the code in these files to create a working simulation that creates log files of major events.
 - Design your program to follow the rules of the simulation.
 - Get your data for virus name, mortality rate, and reproductive rate from [this article](how-ebola-compares).
@@ -52,7 +66,7 @@ Once you have successfully run a simulation, use your python skills to answer to
 	how many total interactions did we see where a vaccination saved a person from potentially becoming infected?
 
 *When you have answered these questions, please put your answers*
-*in a file called <kbd>answers.txt</kbd> and commit this to your repo.*
+*in a file called <kbd>answers.md</kbd> and commit this to your repo.*
 
 ## Getting Started
 Please follow these instructions *exactly*.
@@ -187,14 +201,75 @@ It is currently set to 42, and we will use this to double check that your simula
 and spits out the expected results.
 
 ### Requirements
-**Your repo should contain:**
-- Completed classes for <kbd>logger.py</kbd>, <kbd>simulation.py</kbd>, and <kbd>person.py</kbd>.
-- The addition of at least 2 additional tests to the <kbd>virus.py</kbd> file.
-- The addition of at least 3 additional tests to the <kbd>person.py</kbd> file.
-- At least 1 log file generated from running your simulation.
-- <kbd>simulation_test.py</kbd> file should be created that allows for testing the simulation.
-- <kbd>logger_test.py</kbd> file should be created that allows for the testing of the logger class.
-- Answers to the questions asked above listed in a file named <kbd>answers.txt</kbd>.
+Your primary task is to complete the starter code provided to you from the repository!
+Once you do so, your secondary task is to [answer the questions](#answer-these-questions) from earlier in the README, and add them to a new file, <kbd>answers.md</kbd>.
+
+Your repository should contain four class files in total...
+- <kbd>simulation.py</kbd>
+- <kbd>person.py</kbd>
+- <kbd>virus.py</kbd>
+- <kbd>logger.py</kbd>
+
+Code each of them out to complete your primary task.
+You can start by coding out any function in any file, but we suggest you start with the smallest functions first!
+
+#### <kbd>simulation.py</kbd>
+The simulation class is the highest level of abstraction in the project.
+This will contain all of your logic for two people interacting, and whether the virus impacts them.
+
+Complete the logic in the following methods:
+- `self.__init__()`:
+	Follow the comment instructions to initialize this class.
+- `self.create_population()`:
+	You'll need to create a population by creating new `Person` classes.
+- `self.simulation_should_continue()`:
+	Determines whether the simulation should continue based on the state of the population.
+	Check this out before each `time_step`.
+- `self.infect_newly_infected()`:
+	Newly infected people cannot also die from the virus on the same step, so we have to process them seperately.
+- `self.run()`:
+	This method will create a cycle with a `while` loop until `self.simulation_should_continue()` returns `False`.
+- `self.time_step()`:
+	This is where the interactions between an infected person and a random person from the population will be called.
+	Hopefully, implementing this will help you deconstruct steps in `self.run()` and make it easier to read!
+- `self.interaction()`:
+	Represents an encounter between an infected person, and a random person.
+	This is where a random person may become infected or vaccinated.
+
+#### <kbd>person.py</kbd>
+Represents a single person in the population.
+
+Complete the following logic in the file:
+- `self.did_survive_infection()`:
+	Will roll the dice, and determine whether a person survived based on the virus' mortality rate.
+- You will also have to **code out atleast 3 tests** in this file.
+
+#### <kbd>virus.py</kbd>
+Represents a virus which can infect the population.
+This class will contain varius data about a virus as well.
+- You must **code out atleast 2 tests** within this file.
+
+#### <kbd>logger.py</kbd>
+This class solely exists to log simulation data into a text file.
+As you complete this class, consider which methods you should complete first, and which are less critical for a MVP (minimal viable product).
+
+Complete the following:
+- `self.__init__()`:
+	This method is incomplete!
+	The comments for this one aren't great, so you'll have to figure it out yourself.
+- `self.log_metadata()`:
+	Creates and logs content for the top of the output data file; this is metadata.
+- `self.log_results()`
+	Logs a summary of the simulation to the bottom of the data file, after the simulation completes.
+- `self.log_interaction()`
+	Logs a line in the file, representing a single interaction between two people in the simulation.
+- `self.log_infection_survival()`
+	Logs a line in the file, representing whether an infected person lives or dies.
+- Your project should generate human-readable text and log it to a file every time it runs.
+	When you submit your project, **include at least one log file** generated from running your simulation.
+	- If you aren't sure what this should look like, refer to <kbd>example_results.txt</kbd>, included in this repo.
+	This should help you get started!
+	*Note that the file is incomplete, and doesn't include all steps of the simulation.
 
 ### Stretch Challenges
 You'll find some of the smaller, individual stretch challenges
