@@ -16,13 +16,6 @@ By completing this project, you should be able to...
 1. Practice reading spec, code comments, and starter code
 1. Practice writing basic tests and running them
 
-## Basic Structure
-The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`.
-- `Simulation`: The main class that runs the entire simulation.
-- `Person`: Represents the people that make up the population that the virus is spreading through.
-- `Virus`: Models the properties of the virus we wish to simulate.
-- `Logger`: A helper class for writing the results of the simulation to a file.
-
 ## Project Goals
 - Finish the code in these files to create a working simulation that creates log files of major events.
 - Design your program to follow the rules of the simulation.
