@@ -1,4 +1,4 @@
-# Final Project: Herd Immunity Simulation
+# Project: Herd Immunity Simulation
 We're going to create a basic simulation of *Herd Immunity* by modeling how a virus moves
 through a population where some (but not all) of a population is vaccinated against this virus.
 
@@ -9,14 +9,20 @@ through a population where some (but not all) of a population is vaccinated agai
 This <dfn title='A "README" is a commonly-named file for project details.'>README</dfn> is a draft to help you
 get started on the project and will be updated with more detail as we improve the project and answer questions.
 
-## Learning Outcomes
+## Project Goals
+### Learning Outcomes
 By completing this project, you should be able to...
 
 1. Applying functions, scope, conditionals, loops, lists, OOP, and file I/O
 1. Practice reading spec, code comments, and starter code
 1. Practice writing basic tests and running them
 
-## Project Goals
+### Primary Objective
+For this project to be considered complete, you need to add your repo link to the course tracker.
+Please do not change the random seed set in the Simulation class!
+It is currently set to 42, and we will use this to double check that your simulation works
+and spits out the expected results.
+
 - Finish the code in these files to create a working simulation that creates log files of major events.
 - Design your program to follow the rules of the simulation.
 - Get your data for virus name, mortality rate, and reproductive rate from [this article](how-ebola-compares).
@@ -27,29 +33,7 @@ By completing this project, you should be able to...
 		If a virus has a reproductive rate of 15, then, on average, a sick person
 		should infect 15 of the 100 people they interact with during that time step.
 
-### Rules
-1. A sick person only has a chance at infecting healthy, unvaccinated people they encounter.
-1. An infected person cannot infect a vaccinated person.
-	This still counts as an interaction.
-1. An infected person cannot infect someone that is already infected.
-	This still counts as an interaction.
-1. At the end of a time step, an infected person will either die of the infection or get better.
-	The chance they will die is the percentage chance stored in `mortality_rate`.
-1. For simplicity's sake, if the person does not die, we will consider them immune to the virus
-	and change `is_vaccinated` to `True` when this happens.
-1. Dead people can no longer be infected, either.
-	Any time an individual dies, we should also change their `.infected` attribute to False.
-1. All state changes for a person should occur at the **end** of a time step,
-	after all infected persons have finished all of their interactions.
-1. During the interactions, make note of any new individuals infected on this turn.
-	After the interactions are over, we will change the .infected attribute of all newly infected individuals to `True`.
-1. Resolve the states of all individuals that started the turn infected by determining
-	if they die or survive the infection, and change the appropriate attributes.
-1. The simulation should output a logfile that
-	contains a record of every interaction that occurred during the simulation.
-	We will use this logfile to determine final statistics and answer questions about the simulation.
-
-### Answer These Questions
+### Secondary Objective
 Once you have successfully run a simulation, use your python skills to answer to analyze the simulation results...
 1. What were the inputs you gave the simulation?
 	(Population size, percent vaccinated, virus name, mortality rate, reproductive rate)
@@ -60,6 +44,22 @@ Once you have successfully run a simulation, use your python skills to answer to
 
 *When you have answered these questions, please put your answers*
 *in a file called <kbd>answers.md</kbd> and commit this to your repo.*
+
+### *Optional:* Stretch Challenges
+You'll find some of the smaller, individual stretch challenges
+contained with the comments of the code on the logger class.
+Other stretch challenges include:
+- Extending functionality so that we can test the spread of multiple viruses through
+	a given population at the same time. (Difficulty Level: Hard)
+- Create a Visualizer class that can spit out visualizations of the spread of the virus
+	based on the log files of a simulation.  (Difficulty Level: Medium)
+	- **HINT:**
+		You'll want to use *Matplotlib* for visualization stuff,
+		because its easy to use and generally awesome at this sort of thing.
+	- **HINT:**
+		You may also want to consider using a library like *Pandas* for organizing and cleaning your data in
+		a more professional way, especially if you want to visualize answers to more complex questions.
+	- *Matplotlib* and *Pandas* play very nicely together!
 
 ## Getting Started
 Please follow these instructions *exactly*.
@@ -102,11 +102,7 @@ Set up your local clone of this project repo on your computer.
 > You will want to *fork* it if you find any errors in the code that you
 > or if you want to suggest edits to this <kbd>README.md</kbd> file.
 
-***Let's get coding!***
-You'll find instructions for what you need to do marked within the files themselves.
-Anything that you explicitly need to code should be marked with a comment that starts with `# TODO`.
-
-## Running the Program
+### Running the Program
 The program is designed to be run from the command line.
 You can do this by running `python3 simulation.py` followed by the command line arguments
 in the following order, separated by spaces:
@@ -128,7 +124,7 @@ For this example, you would type: <br />
 `python3 simulation.py Ebola 0.25 0.70 100000 0.90 10` <br />
 into the terminal.
 
-## Basic Structure
+### How the Program Works
 The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`.
 - `Simulation`: Highest level of abstraction. The main class that runs the entire simulation.
 - `Person`: Represents the people that make up the population that the virus is spreading through.
@@ -144,6 +140,32 @@ Within the `time_step()` method, you'll find all the logic necessary for actuall
 &mdash; that is, once you write it.
 As is, the file just contains a bunch of method stubs,
 as well as numerous comments for explaining what you need to do to get everything working.
+
+***Let's get coding!***
+You'll find instructions for what you need to do marked within the files themselves.
+Anything that you explicitly need to code should be marked with a comment that starts with `# TODO`.
+
+### Rules
+1. A sick person only has a chance at infecting healthy, unvaccinated people they encounter.
+1. An infected person cannot infect a vaccinated person.
+	This still counts as an interaction.
+1. An infected person cannot infect someone that is already infected.
+	This still counts as an interaction.
+1. At the end of a time step, an infected person will either die of the infection or get better.
+	The chance they will die is the percentage chance stored in `mortality_rate`.
+1. For simplicity's sake, if the person does not die, we will consider them immune to the virus
+	and change `is_vaccinated` to `True` when this happens.
+1. Dead people can no longer be infected, either.
+	Any time an individual dies, we should also change their `.infected` attribute to False.
+1. All state changes for a person should occur at the **end** of a time step,
+	after all infected persons have finished all of their interactions.
+1. During the interactions, make note of any new individuals infected on this turn.
+	After the interactions are over, we will change the .infected attribute of all newly infected individuals to `True`.
+1. Resolve the states of all individuals that started the turn infected by determining
+	if they die or survive the infection, and change the appropriate attributes.
+1. The simulation should output a logfile that
+	contains a record of every interaction that occurred during the simulation.
+	We will use this logfile to determine final statistics and answer questions about the simulation.
 
 ## Tips for Success
 First, take a look at each of the files.
@@ -187,13 +209,7 @@ to vaccinate yourself against any pre-existing bugs in the template.
 Not sure how to write tests?
 Look at the tests for the Super Hero project and utilize some strategies from those tests.
 
-## Project Completion
-For this project to be considered complete, you need to add your repo link to the course tracker.
-Please do not change the random seed set in the Simulation class!
-It is currently set to 42, and we will use this to double check that your simulation works
-and spits out the expected results.
-
-### Requirements
+## Detailed Requirements
 Your primary task is to complete the starter code provided to you from the repository!
 Once you do so, your secondary task is to [answer the questions](#answer-these-questions) from earlier in the README, and add them to a new file, <kbd>answers.md</kbd>.
 
@@ -206,7 +222,7 @@ Your repository should contain four class files in total...
 Code each of them out to complete your primary task.
 You can start by coding out any function in any file, but we suggest you start with the smallest functions first!
 
-#### <kbd>simulation.py</kbd>
+### <kbd>simulation.py</kbd>
 The simulation class is the highest level of abstraction in the project.
 This will contain all of your logic for two people interacting, and whether the virus impacts them.
 
@@ -229,7 +245,7 @@ Complete the logic in the following methods:
 	Represents an encounter between an infected person, and a random person.
 	This is where a random person may become infected or vaccinated.
 
-#### <kbd>person.py</kbd>
+### <kbd>person.py</kbd>
 Represents a single person in the population.
 
 Complete the following logic in the file:
@@ -237,12 +253,12 @@ Complete the following logic in the file:
 	Will roll the dice, and determine whether a person survived based on the virus' mortality rate.
 - You will also have to **code out atleast 3 tests** in this file.
 
-#### <kbd>virus.py</kbd>
+### <kbd>virus.py</kbd>
 Represents a virus which can infect the population.
 This class will contain varius data about a virus as well.
 - You must **code out atleast 2 tests** within this file.
 
-#### <kbd>logger.py</kbd>
+### <kbd>logger.py</kbd>
 This class solely exists to log simulation data into a text file.
 As you complete this class, consider which methods you should complete first, and which are less critical for a MVP (minimal viable product).
 
@@ -263,21 +279,5 @@ Complete the following:
 	- If you aren't sure what this should look like, refer to <kbd>example_results.txt</kbd>, included in this repo.
 	This should help you get started!
 	*Note that the file is incomplete, and doesn't include all steps of the simulation.
-
-### Stretch Challenges
-You'll find some of the smaller, individual stretch challenges
-contained with the comments of the code on the logger class.
-Other stretch challenges include:
-- Extending functionality so that we can test the spread of multiple viruses through
-	a given population at the same time. (Difficulty Level: Hard)
-- Create a Visualizer class that can spit out visualizations of the spread of the virus
-	based on the log files of a simulation.  (Difficulty Level: Medium)
-	- **HINT:**
-		You'll want to use *Matplotlib* for visualization stuff,
-		because its easy to use and generally awesome at this sort of thing.
-	- **HINT:**
-		You may also want to consider using a library like *Pandas* for organizing and cleaning your data in
-		a more professional way, especially if you want to visualize answers to more complex questions.
-	- *Matplotlib* and *Pandas* play very nicely together!
 
 [how-ebola-compares]: https://www.theguardian.com/news/datablog/ng-interactive/2014/oct/15/visualised-how-ebola-compares-to-other-infectious-diseases
