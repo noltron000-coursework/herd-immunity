@@ -80,7 +80,7 @@ class Simulation:
 			population.append(person)
 
 		# Determine how many people to vaccinate.
-		num_vaccinated = self.initial_infected * self.vaccination_rate
+		num_vaccinated = self.population_size * self.vaccination_rate
 		num_vaccinated = math.floor(num_vaccinated)
 
 		# Vaccinate a random set of the population.
