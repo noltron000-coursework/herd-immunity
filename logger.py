@@ -1,3 +1,7 @@
+################
+# Logger Class #
+################
+
 class Logger(object):
 	'''
 	Utility class responsible for logging simulation interactions to a file.

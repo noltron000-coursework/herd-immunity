@@ -1,3 +1,7 @@
+###############
+# Virus Class #
+###############
+
 class Virus:
 	'''
 	Represents the virus that will be used
@@ -13,6 +17,9 @@ class Virus:
 		self.reproduction_rate = reproduction_rate # a float number between 0.0 and 1.0
 		self.mortality_rate = mortality_rate # a float number between 0.0 and 1.0
 
+##############
+# Unit Tests #
+##############
 
 def test_virus_instantiation():
 	'''
@@ -24,5 +31,5 @@ def test_virus_instantiation():
 	assert virus.reproduction_rate == 0.8
 	assert virus.mortality_rate == 0.3
 
-	# TODO:
-	# Create your own tests that models the virus you are working with.
+# TODO:
+# Create your own tests that model other viruses.

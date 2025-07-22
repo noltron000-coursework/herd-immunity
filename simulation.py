@@ -4,6 +4,10 @@ from person import Person
 from logger import Logger
 from virus import Virus
 
+####################
+# Simulation Class #
+####################
+
 class Simulation:
 	'''
 	Main class that will run the herd immunity simulation program.
@@ -240,6 +244,9 @@ class Simulation:
 		# This is an example of a method that you could implement, if you find it useful!
 		pass
 
+##################
+# CLI Entrypoint #
+##################
 
 if __name__ == "__main__":
 	params = sys.argv[1:]

@@ -2,6 +2,10 @@ import random
 random.seed(42)
 from virus import Virus
 
+################
+# Person Class #
+################
+
 class Person:
 	'''
 	The simulation will contain people, who make up a population.
@@ -36,6 +40,10 @@ class Person:
 		# Finish this method.
 		# Should return a Boolean.
 		pass
+
+##############
+# Unit Tests #
+##############
 
 # The following functions are simple tests
 # to ensure that you are instantiating your `Person` class correctly.
