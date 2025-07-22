@@ -15,11 +15,15 @@ class Logger(object):
 	# that way you can test them one by one as you write your class.
 
 	def __init__(self, file_name):
+		'''
+		Initializes a new Logger class instance.
+		The `file_name` property that's passed in should be the full name
+		of the file that the logs will be written to.
+		'''
+
 		# XXX TODO XXX
 		# Finish this initialization method.
-		# The `file_name` passed should be the full file name of the file
-		# that the logs will be written to.
-		self.file_name = None
+		self.file_name = None # type: str # FIXME
 
 	def log_metadata(
 			self,
