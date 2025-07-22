@@ -19,7 +19,7 @@ By completing this project, you should be able to...
 ### Primary Objective
 Your primary objective is to finish the code in these files to create a working *Herd Immunity* simulation,
 which also generates log files of its major events.
-As you complete the project, design your program to follow the [rules of the simulation](simulation-rules).
+As you complete the project, design your program to follow the [rules of the simulation][simulation-rules].
 
 #### Write Unit Tests
 As you complete your solution,
@@ -57,7 +57,7 @@ Other stretch challenges include:
 	However, you can run this program with data on other viruses as well!
 	Run simulations with them, and then upload their logged results files to GitHub.
 	- **HINT:**
-		You can find some additional virus data [in this article](how-ebola-compares).
+		You can find some additional virus data [in this article][how-ebola-compares].
 		Other than this article, can you find other sources for virus data?
 - **(Difficulty Level: Hard)** -
 	Extend functionality so that we can test the spread of multiple viruses through a given population at the same time.
@@ -80,7 +80,7 @@ or you may not earn credit towards your GitHub commit streak.
 ### Repository Setup
 Set up your local clone of this project repo on your computer.
 
-1. [**Clone this repo** from GitHub](github-repo) onto your local computer.
+1. [**Clone this repo** from GitHub][github-repo] onto your local computer.
 	(Be sure to *clone* it &mdash; do not *fork* it!)
 	1. First, open your terminal and navigate into the folder where you keep your projects:
 		`cd ~/developer/projects/` (or something similar for your folders).
@@ -88,7 +88,7 @@ Set up your local clone of this project repo on your computer.
 		`git clone https://github.com/remake-school/cs-101-project-herd-immunity-simulation herd-immunity-simulation`
 	1. Finally, navigate into the new folder Git just created:
 		`cd herd-immunity-simulation`
-1. [**Create a new empty repo** on GitHub](github-project) also named `cs-101-project-herd-immunity-simulation`,
+1. [**Create a new empty repo** on GitHub][github-project] also named `cs-101-project-herd-immunity-simulation`,
 	and **do not** initialize it with a new README.
 	We need to initialize it **without** a new README to keep the commit tree empty!
 1. **Set the `origin` remote's URL** on your local repo to point to your new repo on GitHub:
@@ -183,6 +183,8 @@ as well as numerous comments for explaining what you need to do to get everythin
 1. The simulation should output a logfile that
 	contains a record of every interaction that occurred during the simulation.
 	We will use this logfile to determine final statistics and answer questions about the simulation.
+
+---
 
 ## Tips for Success
 First, take a look at each of the files.
@@ -295,7 +297,7 @@ Complete the following:
 	*Note that the file is incomplete, and doesn't include all steps of the simulation.
 
 <!-- References --->
-[simulation-rules]: #rules
-[github-new]: https://github.com/new
-[github-project]: https://github.com/remake-school/cs-101-project-herd-immunity-simulation
-[how-ebola-compares]: https://www.theguardian.com/news/datablog/ng-interactive/2014/oct/15/visualised-how-ebola-compares-to-other-infectious-diseases
+- [simulation-rules]: #rules
+- [github-new]: https://github.com/new
+- [github-project]: https://github.com/remake-school/cs-101-project-herd-immunity-simulation
+- [how-ebola-compares]: https://www.theguardian.com/news/datablog/ng-interactive/2014/oct/15/visualised-how-ebola-compares-to-other-infectious-diseases
