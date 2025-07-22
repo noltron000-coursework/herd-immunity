@@ -27,34 +27,26 @@ class Simulation:
 			virus: Virus,
 		):
 		'''
-		- Logger object logger records all events during the simulation.
-		- Population array represents all `Person` objects in the population.
-		- The vaccination percentage represents the total percentage of
-			the population vaccinated at the start of the simulation.
+		Initializes the simulation server.
 
-		-
-		The total infected people is the running total that have been infected since
-		the simulation began, including the currently infected people who died.
-		You will also need to keep track of the number of people that have die
-		as a result of the infection.
+		- The logger object records all events during the simulation.
+		- The population array represents all `Person` objects in the population.
+		- The vaccination percentage represents the total percentage of\
+			the population vaccinated at the start of the simulation.
+		- The total infected people is the running total that have been infected since\
+			the simulation began, including the currently infected people who died.
+		- You will also need to keep track of the number of people that have die\
+			as a result of the infection.
 
 		All arguments will be passed as command-line arguments when the file is run.
-
-		XXX HINT XXX
-		Look in the if `__name__ == "__main__"` function at the bottom.
 		'''
 
 		self.population_size = population_size # type: int
 		self.vaccination_rate = vaccination_rate # type: float
 		self.initial_infected = initial_infected # type: int
-
-		# XXX HINT XXX
-		# This virus property contains a lot of relevant data for later...
 		self.virus = virus # type: Virus
 
-		# XXX HINT XXX
-		# Remember to call the appropriate logger methods
-		# in the corresponding parts of the simulation.
+		# Create a logger class to track important events.
 		file_name = Logger.generate_file_name(
 			virus_name,
 			population_size,
@@ -63,34 +55,8 @@ class Simulation:
 		)
 		self.logger = Logger(file_name)
 
-		# XXX TODO XXX
-		# Call `self.create_population()` and pass in the correct parameters.
-		# Store the array that this method will return in the `self.population` attribute.
-		self.population = [] # type: list[Person] # FIXME
-
-		# XXX TODO XXX
-		# Store each newly infected person in the `newly_infected` attribute.
-		# At the end of each time step, call `self.infect_newly_infected()`,
-		# and then reset `.newly_infected` back to an empty list.
-		self.newly_infected = [] # type: list[Person] # FIXME
-
-		# XXX HINT XXX
-		# Some of these properties might not be needed.
-		# These are just some suggestions for you!
-		# You can add more or remove all of these, just do
-		# what you think is right to organize your solution.
-
-		# The `next_person_id` can be the next available id for all
-		# created `Person` objects, to help generate unique `_id` values.
-		self.next_person_id = 0 # type: int
-
-		# The `current_infected` variable could help you keep track
-		# of the number of people currently infected with the disease.
-		self.current_infected = 0 # type: int
-
-		# These values could also be helpful.
-		self.total_infected = 0 # type: int
-		self.total_dead = 0 # type: int
+		# Generate a population with the correct number of vaccinations and infections.
+		self.population = self.create_population() # type: list[Person]
 
 	def create_population(self, initial_infected):
 		'''
