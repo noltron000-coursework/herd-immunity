@@ -11,7 +11,7 @@ class Logger(object):
 	# Write a test suite for this class to make sure each method is working as expected.
 
 	# XXX HINT XXX
-	# Write your tests before you solve each function,
+	# Try to write your tests before you solve each function,
 	# that way you can test them one by one as you write your class.
 
 	@staticmethod
@@ -55,7 +55,6 @@ class Logger(object):
 
 		# XXX TODO XXX
 		# Finish this method.
-		# This line of metadata should be tab-delimited.
 		# It should create the text file that we will store all logs in.
 
 		# XXX HINT XXX
@@ -64,17 +63,17 @@ class Logger(object):
 
 		results_file = open(self.file_name, "w")
 
+		# XXX HINT XXX
+		# The following code is incorrect and incomplete.
+		# Make sure to end every line with a '/n' character
+		# to ensure that each event logged ends up on a separate line!
 		results_file.write("Simulation for virus: {}".format(virus.name))
 		results_file.write("More content...!")
 		results_file.write("More content...!")
 		results_file.write("More content...!")
 
+		# Close the file - leaving it open can cause problems elsewhere.
 		results_file.close()
-
-		# XXX NOTE XXX
-		# Make sure to end every line with a '/n' character
-		# to ensure that each event logged ends up on a separate line!
-		pass
 
 	def log_results(self):
 		'''
@@ -97,9 +96,11 @@ class Logger(object):
 
 			# XXX HINT XXX
 			# The `person` parameter should always be sick.
+			person,
+
+			# XXX HINT XXX
 			# Think about whether these `random_person` was sick or healthy,
 			# and whether or not they were vaccinated.
-			person,
 			random_person,
 
 			# XXX HINT XXX
@@ -121,11 +122,11 @@ class Logger(object):
 
 		# XXX TODO XXX
 		# Finish this method.
-		# Think about how the booleans that passed (or did not pass) represent all
-		# the possible edge cases.
-		# Use the values passed along with each person, along with whether they are sick
-		# or vaccinated when they interact, to determine exactly what happened
-		# during the interaction.
+		# Think about how the booleans that passed (or did not pass)
+		# represent all the possible edge cases.
+		# Use the values passed along with each person,
+		# along with whether they are sick or vaccinated when they interact,
+		# to determine exactly what happened during the interaction.
 		# Then, create a String, and write to your logfile.
 		pass
 
@@ -148,7 +149,8 @@ class Logger(object):
 
 	def log_time_step(self, time_step_number):
 		'''
-		STRETCH CHALLENGE DETAILS:
+		XXX CHALLENGE XXX
+		Here is an opportunity for a stretch challenge!
 
 		If you choose to extend this method,
 		the format of the summary statistics logged are up to you.
@@ -164,10 +166,7 @@ class Logger(object):
 		- `"Time step {time_step_number} ended, beginning {time_step_number + 1}\\n"`
 		'''
 
-		# XXX TODO XXX
+		# XXX CHALLENGE XXX
 		# Finish this method.
 		# This method should log when a time step ends, and a new one begins.
-
-		# XXX NOTE XXX
-		# Here is an opportunity for a stretch challenge!
 		pass
