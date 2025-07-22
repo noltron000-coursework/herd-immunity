@@ -6,20 +6,20 @@ This ReadMe (project description and specs) is a draft to help you get started o
 
 ### Goals
 
-* Finish the code in these files to create a working simulation that creates log files of major events.  
+* Finish the code in these files to create a working simulation that creates log files of major events.
 * Design your program to follow the rules of the simulation.
-* Get your data for virus name, mortality rate, and basic reproductive rate from [this Guardian article](https://www.theguardian.com/news/datablog/ng-interactive/2014/oct/15/visualised-how-ebola-compares-to-other-infectious-diseases).  
+* Get your data for virus name, mortality rate, and basic reproductive rate from [this Guardian article](https://www.theguardian.com/news/datablog/ng-interactive/2014/oct/15/visualised-how-ebola-compares-to-other-infectious-diseases).
 * During every time step of the simulation, **every sick person** should randomly interact with **100 other people** in the population.  The chance of a sick person infecting a person that they interact with is the virus's basic reproductive rate.  Example: if a virus has a basic reproductive rate of 15, then, on average, a sick person should infect 15 of the 100 people they interact with during that time step.
 
 #### Rules
-1. A sick person only has a chance at infecting healthy, unvaccinated people they encounter.  
-1. An infected person cannot infect a vaccinated person.  This still counts as an interaction.  
+1. A sick person only has a chance at infecting healthy, unvaccinated people they encounter.
+1. An infected person cannot infect a vaccinated person.  This still counts as an interaction.
 1. An infected person cannot infect someone that is already infected.  This still counts as an interaction.
-1. At the end of a time step, an infected person will either die of the infection or get better.  The chance they will die is the percentage chance stored in mortality_rate.  
-1. For simplicity's sake, if the person does not die, we will consider them immune to the virus and change vaccinated to True when this happens.  
-1. Dead people can no longer be infected, either.  Any time an individual dies, we should also change their .infected attribute to False.  
-1. All state changes for a person should occur at the **end** of a time step, after all infected persons have finished all of their interactions.  
-1. During the interactions, make note of any new individuals infected on this turn.  After the interactions are over, we will change the .infected attribute of all newly infected individuals to True.  1. Resolve the states of all individuals that started the turn infected by determining if they die or survive the infection, and change the appropriate attributes.  
+1. At the end of a time step, an infected person will either die of the infection or get better.  The chance they will die is the percentage chance stored in mortality_rate.
+1. For simplicity's sake, if the person does not die, we will consider them immune to the virus and change vaccinated to True when this happens.
+1. Dead people can no longer be infected, either.  Any time an individual dies, we should also change their .infected attribute to False.
+1. All state changes for a person should occur at the **end** of a time step, after all infected persons have finished all of their interactions.
+1. During the interactions, make note of any new individuals infected on this turn.  After the interactions are over, we will change the .infected attribute of all newly infected individuals to True.  1. Resolve the states of all individuals that started the turn infected by determining if they die or survive the infection, and change the appropriate attributes.
 1. The simulation should output a logfile that contains a record of every interaction that occurred during the simulation.  We will use this logfile to determine final statistics and answer questions about the simulation.
 
 #### Answer These Questions
@@ -34,7 +34,7 @@ Once you have successfully run a simulation, use your python skills to answer to
 
 ### Getting Started
 
-To get started on this project, fork this course repo and then clone **your own fork** so you can push your code to GitHub and receive important updates to the code if necessary.  You'll find instructions for what you need to do marked within the files themselves. Anything that you explicitly need to code should be marked with a comment that starts with `#TODO`.  
+To get started on this project, fork this course repo and then clone **your own fork** so you can push your code to GitHub and receive important updates to the code if necessary.  You'll find instructions for what you need to do marked within the files themselves. Anything that you explicitly need to code should be marked with a comment that starts with `#TODO`.
 
 ### Running the program
 
@@ -64,7 +64,7 @@ The program consists of 3 classes: `Simulation`, `Person`, and `Logger`.
 
 *NOTE*: Since viruses are static in this simulation and all we really care about is the name of the virus, the mortality rate of the virus, and the rate at which the virus spreads through a population ("Basic Reproduction Number"), It makes sense to just store that data as attributes at the `Simulation` level.
 
-When you run `simulation.py` with the corresponding command-line arguments necessary for a simulation, a simulation object is created.  This simulation object then calls the `.run()` method.  This method should continually check if the simulation needs to run another step using a helper method contained in the class, and then call `.time_step()` if the simulation has not ended yet.  Within the `time_step()` method, you'll find all the logic necessary for actually simulating everything--that is, once you write it.  As is, the file just contains a bunch of method stubs, as well as numerous comments for explaining what you need to do to get everything working.  
+When you run `simulation.py` with the corresponding command-line arguments necessary for a simulation, a simulation object is created.  This simulation object then calls the `.run()` method.  This method should continually check if the simulation needs to run another step using a helper method contained in the class, and then call `.time_step()` if the simulation has not ended yet.  Within the `time_step()` method, you'll find all the logic necessary for actually simulating everything--that is, once you write it.  As is, the file just contains a bunch of method stubs, as well as numerous comments for explaining what you need to do to get everything working.
 
 ### Tips for Success
 

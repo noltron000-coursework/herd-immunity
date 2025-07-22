@@ -7,7 +7,7 @@ from logger import Logger
 Main class that will run the herd immunity simulation program.
 Expects initialization parameters passed as command line arguments when file is run.
 
-Simulates the spread of a virus through a given population. 
+Simulates the spread of a virus through a given population.
 The percentage of the population that are vaccinated, the size of the population, and the amount of initially infected people in a population are all variables that can be set when the program is run.
 
 _____Attributes______
