@@ -1,4 +1,4 @@
-import random, sys
+import math, random, sys
 random.seed(42)
 from person import Person
 from logger import Logger
@@ -58,33 +58,59 @@ class Simulation:
 		# Generate a population with the correct number of vaccinations and infections.
 		self.population = self.create_population() # type: list[Person]
 
-	def create_population(self, initial_infected):
+	def create_population(self):
 		'''
-		This method will create the initial population (a list of `Person` objects)
-		consisting of initial infected people,initial healthy non-vaccinated people,
-		and initial healthy vaccinated people.
-		Be sure to add them all to the population list!
+		1. This method will create the initial population (a list of `Person` objects)\
+			based on the given population size.
+		2. Then, the method will vaccinate a percentage of them from a virus.
+		3. Finally, it will infect a given number of people in the population.\
+			If too many people are vaccinated to reach the set number,\
+			then as many unvaccinated people as possible are infected.
+		4. The method returns the generated list.
 
-		Args:
-			initial_infected (int):
-				The number of infected people that the simulation will begin with.
 		Returns:
 			list:
 				A list of `Person` objects.
 		'''
-		# XXX TODO XXX
-		# Finish this method!
-		# This method should be called when the simulation begins,
-		# to create the population that will be used.
-		# This method should return an array filled with `Person` objects
-		# that matches the specifications of the simulation:
-		# - The correct number of people in the population.
-		# - The correct percentage of people vaccinated.
-		# - The correct number of initially infected people.
 
-		# Use the attributes created in the init method to create a population
-		# that has the correct intial vaccination percentage and initial infected.
-		pass
+		# Initialize a list of person objects.
+		population: list[Person] = []
+		for _id in range(self.population_size):
+			person = Person(_id)
+			population.append(person)
+
+		# Determine how many people to vaccinate.
+		num_vaccinated = self.initial_infected * self.vaccination_rate
+		num_vaccinated = math.floor(num_vaccinated)
+
+		# Vaccinate a random set of the population.
+		people_to_vaccinate = random.sample(population, num_vaccinated)
+		for person in people_to_vaccinate:
+			person.is_vaccinated = True
+
+		# Determine the remaining unvaccinated population.
+		unvaccinated_population = [
+			person for person in population
+			if not person.is_vaccinated
+		]
+
+		# Next, determine if we can infect the correct number of people.
+		if self.initial_infected > len(unvaccinated_population):
+			# We cannot - too many people are vaccinated!
+			# The server must adjust the number of initially infected people.
+			self.initial_infected = len(unvaccinated_population)
+
+			# XXX TODO XXX
+			# Add a log event of this situation.
+			# The number of initial infected cannot be reached;
+			# there are too many vaccinated people in the population.
+
+		# Infect a random set of the population (that is not vaccinated).
+		people_to_infect = random.sample(unvaccinated_population, self.initial_infected)
+		for person in people_to_infect:
+			person.infection = self.virus
+
+		return population
 
 	def simulation_should_continue(self):
 		'''
