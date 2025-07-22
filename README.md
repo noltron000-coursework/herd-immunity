@@ -33,7 +33,7 @@ In order to double check that your simulation works, and spits out the expected 
 - Please do not change the random seed set throughout the project!
 	The seed is currently set to 42 at the top of each file.
 
-This will also help you compare your results with your peers!
+This will also help you compare your results with your peers.
 
 ### Secondary Objective
 Your secondary objective is to analyze the data that your simulation generates.
@@ -111,7 +111,7 @@ Set up your local clone of this project repo on your computer.
 > but it will not automatically link the original repository.
 >
 > Therefore, if you are seeking to complete this challenge project, you'll likely want to *clone* it.
-> You will want to *fork* it if you find any errors in the code that you
+> You will want to *fork* it if you find any errors in the code,
 > or if you want to suggest edits to this <kbd>README.md</kbd> file.
 
 ### Running the Program
@@ -297,7 +297,7 @@ Complete the following:
 	*Note that the file is incomplete, and doesn't include all steps of the simulation.
 
 <!-- References --->
-- [simulation-rules]: #rules
-- [github-new]: https://github.com/new
-- [github-project]: https://github.com/remake-school/cs-101-project-herd-immunity-simulation
-- [how-ebola-compares]: https://www.theguardian.com/news/datablog/ng-interactive/2014/oct/15/visualised-how-ebola-compares-to-other-infectious-diseases
+[simulation-rules]: #rules
+[github-new]: https://github.com/new
+[github-project]: https://github.com/remake-school/cs-101-project-herd-immunity-simulation
+[how-ebola-compares]: https://www.theguardian.com/news/datablog/ng-interactive/2014/oct/15/visualised-how-ebola-compares-to-other-infectious-diseases
