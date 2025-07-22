@@ -11,20 +11,22 @@ class Person:
 	The simulation will contain people, who make up a population.
 	'''
 
-	def __init__(self, _id, is_vaccinated, infection=None):
+	def __init__(self, _id: int, is_vaccinated = False, infection: Virus | None = None):
 		'''
-		If person is chosen to be infected when the population is created,
-		then the simulation should instantiate a `Virus` object
-		and pass it into the instance via the `infection` parameter.
-		Otherwise, `infection` defaults to `None` (to represent no infection).
+		Initializes a new person.
 		'''
-
-		# We start out with `is_alive = True`, because we don't make vampires or zombies.
-		# All other values will be set by the simulation when it makes each Person object.
 
 		self._id = _id # type: int
-		self.is_alive = True # type: bool
 		self.is_vaccinated = is_vaccinated # type: bool
+
+		# We start out with `is_alive = True`, because we don't make vampires or zombies.
+		# All other values are set by the simulation when it makes each Person object.
+		self.is_alive = True # type: bool
+
+		# If the person is chosen to be infected when the population is created,
+		# then the simulation should instantiate a `Virus` object
+		# and pass it into the instance via the `infection` parameter.
+		# Otherwise, `infection` defaults to `None` (to represent no infection).
 		self.infection = infection # type: Virus | None
 
 	def resolve_infection(self):
