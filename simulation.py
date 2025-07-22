@@ -112,7 +112,7 @@ class Simulation:
 
 		return population
 
-	def simulation_should_continue(self):
+	def should_continue(self):
 		'''
 		The simulation should only end if the entire population is dead,
 		or if the virus has been eradicated (through death and vaccination).
@@ -121,10 +121,17 @@ class Simulation:
 			bool:
 				`True` for simulation should continue, `False` if it should end.
 		'''
-		# XXX TODO XXX
-		# Complete this helper method.
-		# Returns a Boolean.
-		pass
+		# Everyone is dead!
+		if len(self.get_alive()) == 0:
+			return False
+
+		# No one is infected!
+		elif len(self.get_infected()) == 0:
+			return False
+
+		# Simulation needs to continue.
+		else: return True
+
 
 	def infect_newly_infected(self):
 		'''
@@ -147,7 +154,7 @@ class Simulation:
 		# XXX TODO XXX
 		# Finish this method.
 		# To simplify the logic here, use the helper method
-		# `simulation_should_continue()` to tell us whether or not we should continue
+		# `should_continue()` to tell us whether or not we should continue
 		# the simulation and run at least 1 more `time_step`.
 
 		# XXX TODO XXX
@@ -160,7 +167,7 @@ class Simulation:
 		# Set this variable using a helper...
 		time_step_counter = 0
 
-		while self.simulation_should_continue():
+		while self.should_continue():
 			# XXX TODO XXX
 			# for every iteration of this loop, call `self.time_step()`
 			# to compute another round of this simulation.
