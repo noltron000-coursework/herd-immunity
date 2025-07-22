@@ -13,19 +13,22 @@ class Person:
 
 	def __init__(self, _id, is_vaccinated, infection=None):
 		'''
-		We start out with `is_alive = True`, because we don't make vampires or zombies.
-		All other values will be set by the simulation when it makes each Person object.
-
 		If person is chosen to be infected when the population is created,
 		then the simulation should instantiate a `Virus` object
-		and set it as the value of`self.infection`.
-		Otherwise, `self.infection` should be set to `None`.
+		and pass it into the instance via the `infection` parameter.
+		Otherwise, `infection` defaults to `None` (to represent no infection).
 		'''
 
-		self._id = None  # int
-		self.is_alive = True  # boolean
-		self.is_vaccinated = None  # boolean
-		self.infection = None  # `Virus` object or `None`
+		# We start out with `is_alive = True`, because we don't make vampires or zombies.
+		# All other values will be set by the simulation when it makes each Person object.
+
+		# XXX TODO XXX
+		# Set the following properties to something - they shouldn't be None.
+
+		self._id = None # type: int # FIXME
+		self.is_alive = True # type: bool
+		self.is_vaccinated = None # type: bool # FIXME
+		self.infection = None # type: Virus | None # FIXME
 
 	def did_survive_infection(self):
 		'''
