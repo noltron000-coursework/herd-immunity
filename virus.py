@@ -31,5 +31,5 @@ def test_virus_instantiation():
 	assert virus.reproduction_rate == 0.8
 	assert virus.mortality_rate == 0.3
 
-# TODO:
+# XXX TODO XXX
 # Create your own tests that model other viruses.

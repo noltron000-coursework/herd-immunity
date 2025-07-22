@@ -36,30 +36,30 @@ class Simulation:
 
 		All arguments will be passed as command-line arguments when the file is run.
 
-		HINT:
+		XXX HINT XXX
 		Look in the if `__name__ == "__main__"` function at the bottom.
 		'''
 
-		# HINT:
+		# XXX HINT XXX
 		# This virus property contains a lot of relevant data for later...
 		self.virus = virus # `Virus` object
 
-		# TODO:
+		# XXX TODO XXX
 		# Can you refactor this next line by using Python3's "f-string" format?
 		self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(virus_name, population_size, vaccination_rate, initial_infected)
 
-		# TODO:
+		# XXX TODO XXX
 		# Create a Logger object and bind it to `self.logger`.
 		# Remember to call the appropriate logger method
 		# in the corresponding parts of the simulation.
 		self.logger = None # Replace with `Logger` object
 
-		# TODO:
+		# XXX TODO XXX
 		# Call `self.create_population()` and pass in the correct parameters.
 		# Store the array that this method will return in the `self.population` attribute.
 		self.population = [] # List of `Person` objects
 
-		# TODO:
+		# XXX TODO XXX
 		# Store each newly infected person's ID in newly_infected attribute.
 		# At the end of each time step, call `self.infect_newly_infected()`
 		# and then reset `.newly_infected` back to an empty list.
@@ -69,7 +69,7 @@ class Simulation:
 		self.initial_infected = initial_infected # integer number
 		self.vaccination_rate = vaccination_rate # float number between 0 and 1
 
-		# TODO:
+		# XXX TODO XXX
 		# Some of these properties might not be needed.
 		# These are just some suggestions for you!
 		# You can add more or remove all of these, just do
@@ -94,7 +94,7 @@ class Simulation:
 			list:
 				A list of `Person` objects.
 		'''
-		# TODO:
+		# XXX TODO XXX
 		# Finish this method!
 		# This method should be called when the simulation begins,
 		# to create the population that will be used.
@@ -117,7 +117,7 @@ class Simulation:
 			bool:
 				`True` for simulation should continue, `False` if it should end.
 		'''
-		# TODO:
+		# XXX TODO XXX
 		# Complete this helper method.
 		# Returns a Boolean.
 		pass
@@ -127,10 +127,10 @@ class Simulation:
 		This method should iterate through the list of `._id` stored
 		in `self.newly_infected`, and update each `Person` object with the disease.
 		'''
-		# TODO:
+		# XXX TODO XXX
 		# Call this method at the end of every time step and infect each `Person`.
 
-		# TODO:
+		# XXX TODO XXX
 		# Once you have iterated through the entire list of `self.newly_infected`,
 		# remember to reset `self.newly_infected` back to an empty list.
 		pass
@@ -140,29 +140,29 @@ class Simulation:
 		This method should run the simulation until
 		all requirements for ending the simulation are met.
 		'''
-		# TODO:
+		# XXX TODO XXX
 		# Finish this method.
 		# To simplify the logic here, use the helper method
 		# `simulation_should_continue()` to tell us whether or not we should continue
 		# the simulation and run at least 1 more `time_step`.
 
-		# TODO:
+		# XXX TODO XXX
 		# Keep track of the number of time steps that have passed.
-		# HINT:
+		# XXX HINT XXX
 		# You may want to call the logger's `log_time_step()` method
 		# at the end of each time step.
 
-		# TODO:
+		# XXX TODO XXX
 		# Set this variable using a helper...
 		time_step_counter = 0
 
 		while self.simulation_should_continue():
-			# TODO:
+			# XXX TODO XXX
 			# for every iteration of this loop, call `self.time_step()`
 			# to compute another round of this simulation.
 			pass
 
-		# TODO:
+		# XXX TODO XXX
 		# Can you refactor this next line by using Python3's "f-string" format?
 		print('The simulation has ended after {} turns.'.format(time_step_counter))
 
@@ -183,9 +183,9 @@ class Simulation:
 			at the end of each call of `self.time_step()`.
 		'''
 
-		# TODO:
+		# XXX TODO XXX
 		# Finish this method.
-		# HINT:
+		# XXX HINT XXX
 		# Newly infected people cannot die in the same step that they were infected in!
 		pass
 
@@ -205,7 +205,7 @@ class Simulation:
 		assert person.is_alive == True
 		assert random_person.is_alive == True
 
-		# TODO:
+		# XXX TODO XXX
 		# Finish this method.
 
 		# The possible cases you'll need to cover are listed in the docstring below:
@@ -224,23 +224,23 @@ class Simulation:
 			`.infected` attribute can be changed to True at the end of the time step.
 		'''
 
-		# TODO:
+		# XXX TODO XXX
 		# Call slogger method during this method.
 		pass
 
-	# HINT:
+	# XXX HINT XXX
 	# You may wish to implement new helper methods that you make up yourself,
 	# to help organize your thoughts and to help simplify your code elsewhere.
 
 	def print_population(self):
 		'''Prints out every person in the population and their current attributes.'''
-		# NOTE:
+		# XXX NOTE XXX
 		# This is an example of a method that you could implement, if you find it useful!
 		pass
 
 	def get_infected(self):
 		'''Gets all the infected people from the population and returns them as a list.'''
-		# NOTE:
+		# XXX NOTE XXX
 		# This is an example of a method that you could implement, if you find it useful!
 		pass
 
@@ -255,7 +255,7 @@ if __name__ == "__main__":
 		# This section should use "Ebola" virus data as a fallback,
 		# in case no command-line arguments were provided.
 
-		# TODO:
+		# XXX TODO XXX
 		# Fill in the these None-type variables with the relevant
 		# "Ebola" data, which can be found within the `README` file.
 

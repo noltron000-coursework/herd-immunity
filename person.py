@@ -36,7 +36,7 @@ class Person:
 		'''
 
 		# Only called if infection attribute is not None.
-		# TODO:
+		# XXX TODO XXX
 		# Finish this method.
 		# Should return a Boolean.
 		pass
@@ -59,7 +59,7 @@ def test_vacc_person_instantiation():
 def test_not_vacc_person_instantiation():
 	person = Person(2, False)
 
-	# TODO:
+	# XXX TODO XXX
 	# Complete your own assert statements that test the values at each attribute.
 	# assert ...
 	pass
@@ -71,17 +71,17 @@ def test_sick_person_instantiation():
 	# Create a `Person` object and give them the virus infection.
 	person = Person(3, False, virus)
 
-	# TODO:
+	# XXX TODO XXX
 	# Complete your own assert statements that test the values at each attribute.
 	# assert ...
 	pass
 
 def test_did_survive_infection():
-	# TODO:
+	# XXX TODO XXX
 	# Create a `Virus` object to give a `Person` object an infection.
 	virus = Virus("Dysentery", 0.7, 0.2)
 
-	# TODO:
+	# XXX TODO XXX
 	# Create a `Person` object and give them the virus infection.
 	person = Person(4, False, virus)
 
@@ -92,7 +92,7 @@ def test_did_survive_infection():
 	if survived:
 		assert person.is_alive is True
 
-		# TODO:
+		# XXX TODO XXX
 		# Write your own assert statements that test the values of
 		# each attribute for a `Person` who survived.
 		assert False # Replace with something else.
@@ -100,7 +100,7 @@ def test_did_survive_infection():
 	else:
 		assert person.is_alive is False
 
-		# TODO:
+		# XXX TODO XXX
 		# Write your own assert statements that test the values of
 		# each attribute for a `Person` who did not survive.
 		assert False # Replace with something else.

@@ -7,15 +7,15 @@ class Logger(object):
 	Utility class responsible for logging simulation interactions to a file.
 	'''
 
-	# TODO:
+	# XXX TODO XXX
 	# Write a test suite for this class to make sure each method is working as expected.
 
-	# TIP:
+	# XXX HINT XXX
 	# Write your tests before you solve each function,
 	# that way you can test them one by one as you write your class.
 
 	def __init__(self, file_name):
-		# TODO:
+		# XXX TODO XXX
 		# Finish this initialization method.
 		# The `file_name` passed should be the full file name of the file
 		# that the logs will be written to.
@@ -32,12 +32,12 @@ class Logger(object):
 		the specific parameters of the simulation as the first line of the file.
 		'''
 
-		# TODO:
+		# XXX TODO XXX
 		# Finish this method.
 		# This line of metadata should be tab-delimited.
 		# It should create the text file that we will store all logs in.
 
-		# TIP:
+		# XXX HINT XXX
 		# Use 'w' mode when you open the file to overwrite the old data with the new.
 		# For all other methods, use the 'a' mode to append a new log to the end.
 
@@ -50,7 +50,7 @@ class Logger(object):
 
 		results_file.close()
 
-		# NOTE:
+		# XXX NOTE XXX
 		# Make sure to end every line with a '/n' character
 		# to ensure that each event logged ends up on a separate line!
 		pass
@@ -64,24 +64,24 @@ class Logger(object):
 		- "Total Vaccinated: {num_vaccinated}."
 		'''
 
-		# TODO:
+		# XXX TODO XXX
 		# Complete this method.
 
-		# TIP:
+		# XXX HINT XXX
 		# You will have to add or change parameters for some functions in this project!
 		pass
 
 	def log_interaction(
 			self,
 
-			# HINT:
+			# XXX HINT XXX
 			# The `person` parameter should always be sick.
 			# Think about whether these `random_person` was sick or healthy,
 			# and whether or not they were vaccinated.
 			person,
 			random_person,
 
-			# HINT:
+			# XXX HINT XXX
 			# This is just a logger function,
 			# we don't have logic to decide whether or not infections happen here.
 			did_infect=None,
@@ -98,7 +98,7 @@ class Logger(object):
 			because {ex. 'vaccinated' or 'already sick'}.\\n"`
 		'''
 
-		# TODO:
+		# XXX TODO XXX
 		# Finish this method.
 		# Think about how the booleans that passed (or did not pass) represent all
 		# the possible edge cases.
@@ -118,7 +118,7 @@ class Logger(object):
 			or "{person.ID} survived infection.\\n"`
 		'''
 
-		# TODO:
+		# XXX TODO XXX
 		# Finish this method.
 		# If the person survives, then `did_die_from_infection` should be `False`.
 		# Otherwise, `did_die_from_infection` should be `True`.
@@ -143,10 +143,10 @@ class Logger(object):
 		- `"Time step {time_step_number} ended, beginning {time_step_number + 1}\\n"`
 		'''
 
-		# TODO:
+		# XXX TODO XXX
 		# Finish this method.
 		# This method should log when a time step ends, and a new one begins.
 
-		# NOTE:
+		# XXX NOTE XXX
 		# Here is an opportunity for a stretch challenge!
 		pass
