@@ -1,4 +1,4 @@
-# Final Project: Herd Immunity Simulation
+# Project: Herd Immunity Simulation
 We're going to create a basic simulation of *Herd Immunity* by modeling how a virus moves
 through a population where some (but not all) of a population is vaccinated against this virus.
 
@@ -6,33 +6,161 @@ through a population where some (but not all) of a population is vaccinated agai
 > *This project final was originally created (at least) a couple years before the COVID-19 pandemic.*
 > *It's aged quite well; the project is even more fitting to learn with, thanks to some serious retrospective.*
 
-This <dfn title='A "README" is a commonly-named file for project details.'>README</dfn> is a draft to help you
-get started on the project and will be updated with more detail as we improve the project and answer questions.
-
-## Learning Outcomes
-By completing this project, you should be able to...
-
-1. Applying functions, scope, conditionals, loops, lists, OOP, and file I/O
-1. Practice reading spec, code comments, and starter code
-1. Practice writing basic tests and running them
-
-## Basic Structure
-The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`.
-- `Simulation`: The main class that runs the entire simulation.
-- `Person`: Represents the people that make up the population that the virus is spreading through.
-- `Virus`: Models the properties of the virus we wish to simulate.
-- `Logger`: A helper class for writing the results of the simulation to a file.
+This repository is a draft to help you get started on the project,
+and will be updated with more detail as we improve the project and answer questions.
 
 ## Project Goals
-- Finish the code in these files to create a working simulation that creates log files of major events.
-- Design your program to follow the rules of the simulation.
-- Get your data for virus name, mortality rate, and reproductive rate from [this article](how-ebola-compares).
-- During every time step of the simulation, **every sick person**
-	should randomly interact with **100 other people** in the population.
-	The chance of a sick person infecting a person that they interact with is the virus's reproductive rate.
-	- *Example:*
-		If a virus has a reproductive rate of 15, then, on average, a sick person
-		should infect 15 of the 100 people they interact with during that time step.
+### Learning Outcomes
+By completing this project, you should be able to...
+1. Applying functions, scope, conditionals, loops, lists, OOP, and file I/O.
+1. Practice reading spec, code comments, and starter code.
+1. Practice writing basic tests, and practice running them.
+
+### Primary Objective
+Your primary objective is to finish the code in these files to create a working *Herd Immunity* simulation,
+which also generates log files of its major events.
+As you complete the project, design your program to follow the [rules of the simulation][simulation-rules].
+
+#### Write Unit Tests
+As you complete your solution,
+we also want you to complete at least 5 of the test functions littered throughout the codebase.
+You can also create your own tests (these will count towards the required total).
+
+#### Use Sane Defaults
+In order to double check that your simulation works, and spits out the expected results:
+- Please use the *Ebola* example data as at least one of your inputs.
+	This example data can be found [later in the README](#running-the-program).
+- Please do not change the random seed set throughout the project!
+	The seed is currently set to 42 at the top of each file.
+
+This will also help you compare your results with your peers!
+
+### Secondary Objective
+Your secondary objective is to analyze the data that your simulation generates.
+Once you have successfully run a simulation, analyze its log files to answer these questions...
+1. What were the inputs you gave the simulation?
+	(Population size, percent vaccinated, virus name, mortality rate, reproductive rate)
+1. What percentage of the population became infected at some point before the virus burned out?
+1. What percentage of the population died from the virus?
+1. Out of all interactions sick individuals had during the entire simulation,
+	how many total interactions did we see where a vaccination saved a person from potentially becoming infected?
+
+*When you have answered these questions, please put your answers*
+*in a file called <kbd>answers.md</kbd> and commit this to your repo.*
+
+### *Optional:* Stretch Challenges
+You'll find some of the smaller, individual stretch challenges
+contained with the comments of the code on the logger class.
+Other stretch challenges include:
+- **(Difficulty Level: Easy)** -
+	For this project, we give you a data set for Ebola.
+	However, you can run this program with data on other viruses as well!
+	Run simulations with them, and then upload their logged results files to GitHub.
+	- **HINT:**
+		You can find some additional virus data [in this article][how-ebola-compares].
+		Other than this article, can you find other sources for virus data?
+- **(Difficulty Level: Hard)** -
+	Extend functionality so that we can test the spread of multiple viruses through a given population at the same time.
+- **(Difficulty Level: Medium)** -
+	Create a `Visualizer` class that can create visualizations of the virus spreading through the population,
+	based on the log files of a simulation.
+	- **HINT:**
+		You'll want to use *Matplotlib* for visualization stuff,
+		because its easy to use and generally awesome at this sort of thing.
+	- **HINT:**
+		You may also want to consider using a library like *Pandas* for organizing and cleaning your data in
+		a more professional way, especially if you want to visualize answers to more complex questions.
+	- *Matplotlib* and *Pandas* play very nicely together!
+
+## Getting Started
+To download the starter code and earn credit for your project, please follow these instructions *exactly*.
+If you skip a step or do them out of order, it may not work correctly,
+or you may not earn credit towards your GitHub commit streak.
+
+### Repository Setup
+Set up your local clone of this project repo on your computer.
+
+1. [**Clone this repo** from GitHub][github-repo] onto your local computer.
+	(Be sure to *clone* it &mdash; do not *fork* it!)
+	1. First, open your terminal and navigate into the folder where you keep your projects:
+		`cd ~/developer/projects/` (or something similar for your folders).
+	1. Then, run this command to *clone* the course repo:
+		`git clone https://github.com/remake-school/cs-101-project-herd-immunity-simulation herd-immunity-simulation`
+	1. Finally, navigate into the new folder Git just created:
+		`cd herd-immunity-simulation`
+1. [**Create a new empty repo** on GitHub][github-project] also named `cs-101-project-herd-immunity-simulation`,
+	and **do not** initialize it with a new README.
+	We need to initialize it **without** a new README to keep the commit tree empty!
+1. **Set the `origin` remote's URL** on your local repo to point to your new repo on GitHub:
+	`git remote set-url origin https://github.com/<your-github-username>/cs-101-project-herd-immunity-simulation.git`
+1. **Push your local repo** onto your *remote* GitHub repo to link your `main` branch to your `origin` remote:
+	`git push -u origin main`
+1. **Commit your code** to your local repo frequently (each time you've made meaningful progress).
+1. **Push your commits** to your remote GitHub repo when you want to publish and backup your code:
+	`git push` (the `-u` in the previous command lets you omit `origin main` afterward).
+
+> #### *Cloning* vs *Forking*
+> You may either **clone** or **fork** this repository, as either achieves similar results.
+> The difference between cloning and forking usually has to do with intention:
+> If you **fork** the repository into a new one, usually you intend to merge it back into the original repository.
+> If you **clone** the repository into a new one, usually you intend to diverge from the original repository.
+>
+> On *GitHub*, *forking* will not count towards your commit streak,
+> but will neatly and automatically link to the original repository.
+> *cloning*, on the other hand, will count towards your commit streak,
+> but it will not automatically link the original repository.
+>
+> Therefore, if you are seeking to complete this challenge project, you'll likely want to *clone* it.
+> You will want to *fork* it if you find any errors in the code that you
+> or if you want to suggest edits to this <kbd>README.md</kbd> file.
+
+### Running the Program
+The program is designed to be run from the command line.
+You can even run the script as soon as you clone the repository from GitHub!
+(Although it won't do much until you code in some logic, and fill in those empty functions...)
+
+You can run the script by running `python3 simulation.py` in the project's root directory,
+followed by these command line arguments, set in the following order:
+`{virus name} {reproduction rate} {mortality rate} {population size} {vaccination rate}
+{optional: number of people initially infected (default is 1)}`
+
+To get credit for this project, you'll have to run your program with the following input data:
+
+|                              |         |
+| ---------------------------- | ------- |
+| Virus Name                   | Ebola   |
+| Reproduction Rate            | 25%     |
+| Mortality Rate               | 70%     |
+| Population Size              | 100,000 |
+| Vaccination Rate             | 90%     |
+| Initial Number of Infections | 10      |
+
+To run your script with this data, you will type: <br />
+`python3 simulation.py Ebola 0.25 0.70 100000 0.90 10` <br />
+into the terminal.
+
+### How the Program Works
+The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`.
+- `Simulation`: Highest level of abstraction. The main class that runs the entire simulation.
+- `Person`: Represents the people that make up the population that the virus is spreading through.
+- `Virus`: Models the properties of the virus we wish to simulate.
+- `Logger`: A helper class for logging all events that happen in the simulation.
+
+When you run <kbd>simulation.py</kbd> with the corresponding command-line arguments necessary for a simulation,
+a `Simulation` class instance is created.
+This simulation object then calls the `.run()` method.
+This method should continually check if the simulation needs to run another step using
+a helper method contained in the class, and then call `.time_step()` if the simulation has not ended yet.
+Within the `.time_step()` method, you'll find all the logic necessary for actually simulating everything
+&mdash; that is, once you write it.
+
+As is, the files just contain a bunch of method stubs,
+as well as numerous comments for explaining what you need to do to get everything working.
+
+> #### *Let's get coding!*
+> While there are more details within this <kbd>README</kbd>, you already have enough context to get started!
+> You'll find instructions for what you need to do marked within the files themselves.
+> Anything that you explicitly need to code should be marked with a comment that starts with `# TODO`.
 
 ### Rules
 1. A sick person only has a chance at infecting healthy, unvaccinated people they encounter.
@@ -56,101 +184,7 @@ The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`
 	contains a record of every interaction that occurred during the simulation.
 	We will use this logfile to determine final statistics and answer questions about the simulation.
 
-### Answer These Questions
-Once you have successfully run a simulation, use your python skills to answer to analyze the simulation results...
-1. What were the inputs you gave the simulation?
-	(Population size, percent vaccinated, virus name, mortality rate, reproductive rate)
-1. What percentage of the population became infected at some point before the virus burned out?
-1. What percentage of the population died from the virus?
-1. Out of all interactions sick individuals had during the entire simulation,
-	how many total interactions did we see where a vaccination saved a person from potentially becoming infected?
-
-*When you have answered these questions, please put your answers*
-*in a file called <kbd>answers.md</kbd> and commit this to your repo.*
-
-## Getting Started
-Please follow these instructions *exactly*.
-If you skip a step or do them out of order, it may not work correctly,
-or you may not earn credit towards your GitHub commit streak. wnat to fix, for example,
-
-### Repository Setup
-Set up your local clone of this project repo on your computer.
-
-1. **Clone** (do not *fork*) **this repo** from GitHub onto your local computer.
-	1. First, open your terminal and navigate into the folder where you keep your projects:
-		`cd ~/developer/projects/` (or something similar for your folders).
-	1. Then, run this command to *clone* the course repo:
-		`git clone https://github.com/remake-school/cs-101-project-herd-immunity-simulation herd-immunity-simulation`
-	1. Finally, navigate into the new folder Git just created:
-		`cd herd-immunity-simulation`
-1. [**Create a new empty repo** on GitHub](https://github.com/new) also named `cs-101-project-herd-immunity-simulation`,
-	and **do not** initialize it with a README.
-	(Creating a *new* repo instead of a *fork* allows you to earn credit towards your GitHub commit streak.)
-1. **Set the `origin` remote's URL** on your local repo to point to your new repo on GitHub:
-	`git remote set-url origin https://github.com/<your-github-username>/cs-101-project-herd-immunity-simulation.git`
-1. **Push your local repo** to your *remote* GitHub repo to link your `main` branch to your `origin` remote:
-	`git push -u origin main`
-1. **Commit your code** to your local repo frequently (each time you've made meaningful progress).
-1. **Push your commits** to your remote GitHub repo when you want to publish and backup your code:
-	`git push` (the `-u` in the previous command lets you omit `origin main` afterward).
-
-> #### *Cloning* vs *Forking*
-> You may either **clone** or **fork** this repository, as either achieves similar results.
-> The difference between cloning and forking usually has to do with intention:
-> If you **fork** the repository into a new one, usually you intend to merge it back into the original repository.
-> If you **clone** the repository into a new one, usually you intend to diverge from the original repository.
->
-> On *GitHub*, *forking* will not count towards your commit streak,
-> but will neatly and automatically link to the original repository.
-> *cloning*, on the other hand, will count towards your commit streak,
-> but it will not automatically link the original repository.
->
-> Therefore, if you are seeking to complete this challenge project, you'll likely want to *clone* it.
-> You will want to *fork* it if you find any errors in the code that you
-> or if you want to suggest edits to this <kbd>README.md</kbd> file.
-
-***Let's get coding!***
-You'll find instructions for what you need to do marked within the files themselves.
-Anything that you explicitly need to code should be marked with a comment that starts with `# TODO`.
-
-## Running the Program
-The program is designed to be run from the command line.
-You can do this by running `python3 simulation.py` followed by the command line arguments
-in the following order, separated by spaces:
-`{population size} {vaccination rate} {virus name} {mortality rate} {reproduction rate}
-{optional: number of people initially infected (default is 1)}`
-
-Let's look at an example:
-
-|                              |         |
-| ---------------------------- | ------- |
-| Virus Name                   | Ebola   |
-| Reproduction Rate            | 25%     |
-| Mortality Rate               | 70%     |
-| Population Size              | 100,000 |
-| Vaccination Rate             | 90%     |
-| Initial Number of Infections | 10      |
-
-For this example, you would type: <br />
-`python3 simulation.py Ebola 0.25 0.70 100000 0.90 10` <br />
-into the terminal.
-
-## Basic Structure
-The program consists of 4 classes: `Person`, `Virus`, `Simulation`, and `Logger`.
-- `Simulation`: Highest level of abstraction. The main class that runs the entire simulation.
-- `Person`: Represents the people that make up the population that the virus is spreading through.
-- `Virus`: Models the properties of the virus we wish to simulate.
-- `Logger`: A helper class for logging all events that happen in the simulation.
-
-When you run `simulation.py` with the corresponding command-line arguments necessary
-for a simulation, a simulation object is created.
-This simulation object then calls the `.run()` method.
-This method should continually check if the simulation needs to run another step using
-a helper method contained in the class, and then call `.time_step()` if the simulation has not ended yet.
-Within the `time_step()` method, you'll find all the logic necessary for actually simulating everything
-&mdash; that is, once you write it.
-As is, the file just contains a bunch of method stubs,
-as well as numerous comments for explaining what you need to do to get everything working.
+---
 
 ## Tips for Success
 First, take a look at each of the files.
@@ -194,15 +228,11 @@ to vaccinate yourself against any pre-existing bugs in the template.
 Not sure how to write tests?
 Look at the tests for the Super Hero project and utilize some strategies from those tests.
 
-## Project Completion
-For this project to be considered complete, you need to add your repo link to the course tracker.
-Please do not change the random seed set in the Simulation class!
-It is currently set to 42, and we will use this to double check that your simulation works
-and spits out the expected results.
-
-### Requirements
-Your primary task is to complete the starter code provided to you from the repository!
-Once you do so, your secondary task is to [answer the questions](#answer-these-questions) from earlier in the README, and add them to a new file, <kbd>answers.md</kbd>.
+## Detailed Requirements
+Your [primary objective](#primary-objective) is to complete the starter code provided to you from the repository!
+To help you with that task, we've put together a detailed overview of the functions that you will have to code out.
+(This section is totally optional to read, but it may help outline what you want to work on next
+&mdash; whether you're just starting on the project, or you're already halfway through.)
 
 Your repository should contain four class files in total...
 - <kbd>simulation.py</kbd>
@@ -210,10 +240,7 @@ Your repository should contain four class files in total...
 - <kbd>virus.py</kbd>
 - <kbd>logger.py</kbd>
 
-Code each of them out to complete your primary task.
-You can start by coding out any function in any file, but we suggest you start with the smallest functions first!
-
-#### <kbd>simulation.py</kbd>
+### <kbd>simulation.py</kbd>
 The simulation class is the highest level of abstraction in the project.
 This will contain all of your logic for two people interacting, and whether the virus impacts them.
 
@@ -236,23 +263,21 @@ Complete the logic in the following methods:
 	Represents an encounter between an infected person, and a random person.
 	This is where a random person may become infected or vaccinated.
 
-#### <kbd>person.py</kbd>
+### <kbd>person.py</kbd>
 Represents a single person in the population.
-
 Complete the following logic in the file:
 - `self.did_survive_infection()`:
 	Will roll the dice, and determine whether a person survived based on the virus' mortality rate.
 - You will also have to **code out atleast 3 tests** in this file.
 
-#### <kbd>virus.py</kbd>
+### <kbd>virus.py</kbd>
 Represents a virus which can infect the population.
 This class will contain varius data about a virus as well.
 - You must **code out atleast 2 tests** within this file.
 
-#### <kbd>logger.py</kbd>
+### <kbd>logger.py</kbd>
 This class solely exists to log simulation data into a text file.
 As you complete this class, consider which methods you should complete first, and which are less critical for a MVP (minimal viable product).
-
 Complete the following:
 - `self.__init__()`:
 	This method is incomplete!
@@ -271,20 +296,8 @@ Complete the following:
 	This should help you get started!
 	*Note that the file is incomplete, and doesn't include all steps of the simulation.
 
-### Stretch Challenges
-You'll find some of the smaller, individual stretch challenges
-contained with the comments of the code on the logger class.
-Other stretch challenges include:
-- Extending functionality so that we can test the spread of multiple viruses through
-	a given population at the same time. (Difficulty Level: Hard)
-- Create a Visualizer class that can spit out visualizations of the spread of the virus
-	based on the log files of a simulation.  (Difficulty Level: Medium)
-	- **HINT:**
-		You'll want to use *Matplotlib* for visualization stuff,
-		because its easy to use and generally awesome at this sort of thing.
-	- **HINT:**
-		You may also want to consider using a library like *Pandas* for organizing and cleaning your data in
-		a more professional way, especially if you want to visualize answers to more complex questions.
-	- *Matplotlib* and *Pandas* play very nicely together!
-
-[how-ebola-compares]: https://www.theguardian.com/news/datablog/ng-interactive/2014/oct/15/visualised-how-ebola-compares-to-other-infectious-diseases
+<!-- References --->
+- [simulation-rules]: #rules
+- [github-new]: https://github.com/new
+- [github-project]: https://github.com/remake-school/cs-101-project-herd-immunity-simulation
+- [how-ebola-compares]: https://www.theguardian.com/news/datablog/ng-interactive/2014/oct/15/visualised-how-ebola-compares-to-other-infectious-diseases
