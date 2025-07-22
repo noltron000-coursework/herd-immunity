@@ -14,6 +14,23 @@ class Logger(object):
 	# Write your tests before you solve each function,
 	# that way you can test them one by one as you write your class.
 
+	@staticmethod
+	def generate_file_name(
+			virus_name,
+			population_size,
+			vaccination_rate,
+			initial_infected,
+		):
+		'''
+		This static method generates a logfile name and returns it,
+		based on a few parameters about the simulation (as listed).
+		'''
+
+		# XXX CHALLENGE XXX
+		# Can you refactor this next line by using Python3's "f-string" format?
+		name = "sim_{}_pop_{}_vac_{}_inf_{}.txt".format(virus_name, population_size, vaccination_rate, initial_infected)
+		return name.lower()
+
 	def __init__(self, file_name):
 		'''
 		Initializes a new Logger class instance.
