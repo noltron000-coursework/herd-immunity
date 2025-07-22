@@ -11,6 +11,10 @@ class Person:
 	The simulation will contain people, who make up a population.
 	'''
 
+	@property
+	def is_infected(self):
+		return self.infection is not None
+
 	def __init__(self, _id: int, is_vaccinated = False, infection: Virus | None = None):
 		'''
 		Initializes a new person.

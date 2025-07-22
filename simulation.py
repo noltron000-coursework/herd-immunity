@@ -250,21 +250,23 @@ class Simulation:
 		# Call slogger method during this method.
 		pass
 
-	# XXX HINT XXX
-	# You may wish to implement new helper methods that you make up yourself,
-	# to help organize your thoughts and to help simplify your code elsewhere.
+	def resolve_infections(self):
+		deaths = []
 
-	def print_population(self):
-		'''Prints out every person in the population and their current attributes.'''
-		# XXX NOTE XXX
-		# This is an example of a method that you could implement, if you find it useful!
-		pass
+		for infected in self.get_infected():
+			died = infected.resolve_infection()
+			if died: deaths.append(infected)
+
+		# XXX TODO XXX
+		# Have to apply infected status to newly infected people.
+
+	def get_alive(self):
+		'''Gets everyone in the population that is still alive, and returns them.'''
+		return [p for p in self.population if p.is_alive]
 
 	def get_infected(self):
 		'''Gets all the infected people from the population and returns them as a list.'''
-		# XXX NOTE XXX
-		# This is an example of a method that you could implement, if you find it useful!
-		pass
+		return [p for p in self.population if p.is_infected]
 
 ##################
 # CLI Entrypoint #
