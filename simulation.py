@@ -251,22 +251,47 @@ class Simulation:
 if __name__ == "__main__":
 	params = sys.argv[1:]
 
-	# Virus properties
-	virus_name = str(params[0])
-	reproduction_rate = float(params[1])
-	mortality_rate = float(params[2])
+	if len(params) < 5:
+		# This section should use "Ebola" virus data as a fallback,
+		# in case no command-line arguments were provided.
 
-	# Population properties
-	population_size = int(params[3])
-	vaccination_rate = float(params[4])
+		# TODO:
+		# Fill in the these None-type variables with the relevant
+		# "Ebola" data, which can be found within the `README` file.
 
-	if len(params) == 6:
-		initial_infections = int(params[5])
+		# Ebola Virus properties
+		virus_name = "Ebola"
+		reproduction_rate = None
+		mortality_rate = None
+
+		# Population properties
+		population_size = None
+		vaccination_rate = None
+		initial_infections = None
+
+		# XXX TODO XXX
+		# Delete this exception once the above is implemented...
+		raise Exception("Bad command line arguments.")
+
 	else:
+		# Virus properties
+		virus_name = str(params[0])
+		reproduction_rate = float(params[1])
+		mortality_rate = float(params[2])
+
+		# Population properties
+		population_size = int(params[3])
+		vaccination_rate = float(params[4])
 		initial_infections = 1
 
-	# Create Virus class instance...
+		if len(params) > 5:
+			initial_infections = int(params[5])
+
+	# Create a new Virus class instance...
 	virus = Virus(virus_name, reproduction_rate, mortality_rate)
-	# Create Simulation class instance using new virus.
+
+	# Create a new Simulation class instance, using the new virus.
 	simulation = Simulation(population_size, vaccination_rate, initial_infections, virus)
+
+	# Run the simulation!!! This should generate a new log file.
 	simulation.run()
