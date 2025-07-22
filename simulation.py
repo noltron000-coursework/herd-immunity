@@ -291,23 +291,15 @@ if __name__ == "__main__":
 		# This section should use "Ebola" virus data as a fallback,
 		# in case no command-line arguments were provided.
 
-		# XXX TODO XXX
-		# Fill in the these None-type variables with the relevant
-		# "Ebola" data, which can be found within the `README` file.
-
 		# Ebola Virus properties
 		virus_name = "Ebola"
-		reproduction_rate = None
-		mortality_rate = None
+		reproduction_rate = 0.25
+		mortality_rate = 0.70
 
-		# Population properties
-		population_size = None
-		vaccination_rate = None
-		initial_infections = None
-
-		# XXX TODO XXX
-		# Delete this exception once the above is implemented...
-		raise Exception("Bad command line arguments.")
+		# Default population properties
+		population_size = 100000
+		vaccination_rate = 0.90
+		initial_infections = 10
 
 	else:
 		# Virus properties
