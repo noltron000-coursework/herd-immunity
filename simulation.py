@@ -61,8 +61,8 @@ class Simulation:
 		# and then reset `.newly_infected` back to an empty list.
 		self.newly_infected = [] # List of `Person` objects
 
-		self.population_size = population_size #  integer number
-		self.initial_infected = initial_infected #  integer number
+		self.population_size = population_size # integer number
+		self.initial_infected = initial_infected # integer number
 		self.vaccination_rate = vaccination_rate # float number between 0 and 1
 
 		# TODO:
@@ -71,9 +71,9 @@ class Simulation:
 		# You can add more or remove all of these, just do
 		# what you think is right to organize your solution.
 		self.next_person_id = 0 # integer number
-		self.current_infected = 0 #  integer number
-		self.total_infected = 0 #  integer number
-		self.total_dead = 0 #  integer number
+		self.current_infected = 0 # integer number
+		self.total_infected = 0 # integer number
+		self.total_dead = 0 # integer number
 
 
 	def create_population(self, initial_infected):
