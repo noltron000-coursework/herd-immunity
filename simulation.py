@@ -151,31 +151,18 @@ class Simulation:
 		This method should run the simulation until
 		all requirements for ending the simulation are met.
 		'''
-		# XXX TODO XXX
-		# Finish this method.
-		# To simplify the logic here, use the helper method
-		# `should_continue()` to tell us whether or not we should continue
-		# the simulation and run at least 1 more `time_step`.
 
-		# XXX TODO XXX
-		# Keep track of the number of time steps that have passed.
-		# XXX HINT XXX
-		# You may want to call the logger's `log_time_step()` method
-		# at the end of each time step.
+		# Keeps track of the number of time steps that have passed.
+		num_cycles = 0
 
-		# XXX TODO XXX
-		# Set this variable using a helper...
-		time_step_counter = 0
-
+		# Runs until the simulation completes.
 		while self.should_continue():
-			# XXX TODO XXX
-			# for every iteration of this loop, call `self.time_step()`
-			# to compute another round of this simulation.
-			pass
+			num_cycles += 1
+			self.time_step()
+			self.logger.log_time_step(num_cycles)
 
-		# XXX TODO XXX
-		# Can you refactor this next line by using Python3's "f-string" format?
-		print('The simulation has ended after {} turns.'.format(time_step_counter))
+		# Call final logger method...
+		self.logger.log_results(num_cycles)
 
 	def time_step(self):
 		'''
