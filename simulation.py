@@ -19,16 +19,20 @@ class Simulation:
 	that can be set when the program is run.
 	'''
 
-	def __init__(self, population_size, vaccination_rate, initial_infected, virus):
+	def __init__(
+			self,
+			population_size: int,
+			vaccination_rate: float,
+			initial_infected: int,
+			virus: Virus,
+		):
 		'''
-		Logger object logger records all events during the simulation.
-		Population represents all `Person` objects in the population.
-		The `next_person_id` is the next available id for all created `Person` objects,
-		and should have a unique `_id` value.
-		The vaccination percentage represents the total percentage
-		of population vaccinated at the start of the simulation.
-		You will need to keep track of the number
-		of people currently infected with the disease.
+		- Logger object logger records all events during the simulation.
+		- Population array represents all `Person` objects in the population.
+		- The vaccination percentage represents the total percentage of
+			the population vaccinated at the start of the simulation.
+
+		-
 		The total infected people is the running total that have been infected since
 		the simulation began, including the currently infected people who died.
 		You will also need to keep track of the number of people that have die
@@ -40,45 +44,53 @@ class Simulation:
 		Look in the if `__name__ == "__main__"` function at the bottom.
 		'''
 
+		self.population_size = population_size # type: int
+		self.vaccination_rate = vaccination_rate # type: float
+		self.initial_infected = initial_infected # type: int
+
 		# XXX HINT XXX
 		# This virus property contains a lot of relevant data for later...
-		self.virus = virus # `Virus` object
+		self.virus = virus # type: Virus
 
-		# XXX TODO XXX
-		# Can you refactor this next line by using Python3's "f-string" format?
-		self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(virus_name, population_size, vaccination_rate, initial_infected)
-
-		# XXX TODO XXX
-		# Create a Logger object and bind it to `self.logger`.
-		# Remember to call the appropriate logger method
+		# XXX HINT XXX
+		# Remember to call the appropriate logger methods
 		# in the corresponding parts of the simulation.
-		self.logger = None # Replace with `Logger` object
+		file_name = Logger.generate_file_name(
+			virus_name,
+			population_size,
+			vaccination_rate,
+			initial_infected,
+		)
+		self.logger = Logger(file_name)
 
 		# XXX TODO XXX
 		# Call `self.create_population()` and pass in the correct parameters.
 		# Store the array that this method will return in the `self.population` attribute.
-		self.population = [] # List of `Person` objects
+		self.population = [] # type: list[Person] # FIXME
 
 		# XXX TODO XXX
-		# Store each newly infected person's ID in newly_infected attribute.
-		# At the end of each time step, call `self.infect_newly_infected()`
+		# Store each newly infected person in the `newly_infected` attribute.
+		# At the end of each time step, call `self.infect_newly_infected()`,
 		# and then reset `.newly_infected` back to an empty list.
-		self.newly_infected = [] # List of `Person` objects
+		self.newly_infected = [] # type: list[Person] # FIXME
 
-		self.population_size = population_size # integer number
-		self.initial_infected = initial_infected # integer number
-		self.vaccination_rate = vaccination_rate # float number between 0 and 1
-
-		# XXX TODO XXX
+		# XXX HINT XXX
 		# Some of these properties might not be needed.
 		# These are just some suggestions for you!
 		# You can add more or remove all of these, just do
 		# what you think is right to organize your solution.
-		self.next_person_id = 0 # integer number
-		self.current_infected = 0 # integer number
-		self.total_infected = 0 # integer number
-		self.total_dead = 0 # integer number
 
+		# The `next_person_id` can be the next available id for all
+		# created `Person` objects, to help generate unique `_id` values.
+		self.next_person_id = 0 # type: int
+
+		# The `current_infected` variable could help you keep track
+		# of the number of people currently infected with the disease.
+		self.current_infected = 0 # type: int
+
+		# These values could also be helpful.
+		self.total_infected = 0 # type: int
+		self.total_dead = 0 # type: int
 
 	def create_population(self, initial_infected):
 		'''
