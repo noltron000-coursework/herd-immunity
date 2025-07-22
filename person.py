@@ -38,10 +38,8 @@ class Person:
 		Return a boolean value indicating whether or not they survived the infection.
 		'''
 
-		# Only called if infection attribute is not None.
 		# XXX TODO XXX
-		# Finish this method.
-		# Should return a Boolean.
+		# Finish this method - it should return a boolean.
 		pass
 
 ##############
