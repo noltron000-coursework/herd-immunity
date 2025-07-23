@@ -75,14 +75,16 @@ class Logger(object):
 		# Close the file - leaving it open can cause problems elsewhere.
 		results_file.close()
 
-	def log_results(self):
+	def log_results(self, num_cycles):
 		'''
 		Logs the results of the simulation to the file.
 		Should include at least three strings:
-		- "Simulation ended after {num_turns} turns."
+		- "Simulation ended after {num_cycles} turns."
 		- "Total Dead: {num_deaths}."
 		- "Total Vaccinated: {num_vaccinated}."
 		'''
+
+		f"The simulation has ended after {num_cycles} turns."
 
 		# XXX TODO XXX
 		# Complete this method.
