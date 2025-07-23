@@ -246,13 +246,18 @@ class Simulation:
 
 	def resolve_infections(self):
 		deaths = []
+		infections = []
 
 		for infected in self.get_infected(is_dormant=False):
 			died = infected.resolve_infection()
 			if died: deaths.append(infected)
 
+		for infected in self.get_infected(is_dormant=True):
+			infected.is_dormant = False
+			infections.append(infected)
+
 		# XXX TODO XXX
-		# Have to apply infected status to newly infected people.
+		# Log the number of deaths and infections somewhere.
 
 	def get_alive(self):
 		'''Gets everyone in the population that is still alive, and returns them.'''
