@@ -265,7 +265,7 @@ class Simulation:
 
 	def get_infected(self, is_dormant: bool | None = None):
 		'''Gets all the infected people from the population and returns them as a list.'''
-		infected_population = [p for p in self.population if p.is_infected]
+		infected_population = [p for p in self.population if p.infection is not None]
 		if is_dormant is None:
 			return infected_population
 		else:
