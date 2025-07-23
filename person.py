@@ -33,6 +33,10 @@ class Person:
 		# Otherwise, `infection` defaults to `None` (to represent no infection).
 		self.infection = infection # type: Virus | None
 
+		# This helps us find whether an infection is dormant or not later...
+		# If there is no infection, then this must be set to `False`.
+		self.is_dormant = False
+
 	def resolve_infection(self):
 		'''
 		Generates a random number and compare it to the `mortality_rate`.
@@ -53,11 +57,13 @@ class Person:
 			# The person dies...
 			self.is_alive = False
 			self.is_vaccinated = False
+			self.is_dormant = False
 			self.infection = None
 			return False
 		else:
 			# The person lives!
 			self.is_vaccinated = True
+			self.is_dormant = False
 			self.infection = None
 			return True
 

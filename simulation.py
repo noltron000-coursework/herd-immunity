@@ -247,7 +247,7 @@ class Simulation:
 	def resolve_infections(self):
 		deaths = []
 
-		for infected in self.get_infected():
+		for infected in self.get_infected(is_dormant=False):
 			died = infected.resolve_infection()
 			if died: deaths.append(infected)
 
@@ -258,9 +258,13 @@ class Simulation:
 		'''Gets everyone in the population that is still alive, and returns them.'''
 		return [p for p in self.population if p.is_alive]
 
-	def get_infected(self):
+	def get_infected(self, is_dormant: bool | None = None):
 		'''Gets all the infected people from the population and returns them as a list.'''
-		return [p for p in self.population if p.is_infected]
+		infected_population = [p for p in self.population if p.is_infected]
+		if is_dormant is None:
+			return infected_population
+		else:
+			return [p for p in infected_population if p.is_dormant == is_dormant]
 
 ##################
 # CLI Entrypoint #
