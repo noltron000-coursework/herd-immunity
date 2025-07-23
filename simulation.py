@@ -184,15 +184,9 @@ class Simulation:
 		for computing one time step-in the simulation.
 
 		This includes:
-		1. 100 total interactions with a random person
-			for each infected person in the population.
-		2. If the person is dead, grab another random person from the population.
-			(Since we don't interact with dead people,
-			this does not count as an interaction.)
-		3. Otherwise call `simulation.interaction(person, random_person)`
-			and increment interaction counter by +1.
-		4. You can also determine how many die from their infections
-			at the end of each call of `self.time_step()`.
+		1. Calculate 100 unique random interactions between two people.
+		2. Calling `simulation.interaction(person, random_person)` for each interaction.
+		3. Resolving who dies, who lives, and who gets sick.
 		'''
 
 		MAX_NUM_INTERACTIONS = 100
