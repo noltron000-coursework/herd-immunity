@@ -1,5 +1,7 @@
 from population import Population
 from virus import Virus
+from typing import Literal
+from person import Person
 
 ################
 # Logger Class #
@@ -95,20 +97,15 @@ class Logger(object):
 
 	def log_interaction(
 			self,
-
-			# XXX HINT XXX
-			# The `person` parameter should always be sick.
-			person,
-
-			# XXX HINT XXX
-			# Think about whether these `random_person` was sick or healthy,
-			# and whether or not they were vaccinated.
-			random_person,
-
-			# XXX HINT XXX
-			# This is just a logger function,
-			# we don't have logic to decide whether or not infections happen here.
-			did_infect=None,
+			person1,
+			person2,
+			scenario: Literal[
+				'all-remain-healthy',
+				'all-remain-infected',
+				'has-vaccination',
+				'got-infection',
+				'got-lucky',
+			]
 		):
 		'''
 		The Simulation object should use this method to log
@@ -122,15 +119,53 @@ class Logger(object):
 			because {ex. 'vaccinated' or 'already sick'}.\\n"`
 		'''
 
-		# XXX TODO XXX
-		# Finish this method.
-		# Think about how the booleans that passed (or did not pass)
-		# represent all the possible edge cases.
-		# Use the values passed along with each person,
-		# along with whether they are sick or vaccinated when they interact,
-		# to determine exactly what happened during the interaction.
-		# Then, create a String, and write to your logfile.
-		pass
+		# Collect the log results string in this variable...
+		result: str
+
+		# Determine which scenario applies for the logfile.
+		if scenario == 'all-remain-healthy':
+			result = (
+				f"{person1} and {person2} interacted,"
+				" but both are healthy.\n"
+			)
+		elif scenario == 'all-remain-infected':
+			result = (
+				f"{person1} and {person2} interacted,"
+				" but both are sick already.\n"
+			)
+		else:
+			# Determine who is sick, and who is not.
+			sick_person: Person
+			healthy_person: Person
+			if person1.infection != None:
+				sick_person = person1
+				healthy_person = person2
+			else:
+				sick_person = person2
+				healthy_person = person1
+
+			# Continue with possible scenarios...
+			if scenario == 'has-vaccination':
+				result = (
+					f"{sick_person} didn't infect {healthy_person}"
+					" because they are vaccinated.\n"
+				)
+			elif scenario == 'got-lucky':
+				result = (
+					f"{sick_person} didn't infect {healthy_person}"
+					" because they got lucky.\n"
+				)
+			elif scenario == 'got-infection':
+				result = (
+					f"{sick_person} infected {healthy_person}!"
+					" The infection has spread.\n"
+				)
+
+		# Finally, write the interaction results to the logfile.
+		logfile = open(self.file_name, "a")
+		logfile.write(result)
+		logfile.close()
+		return result
 
 	def log_infection_survival(self, person, did_die_from_infection):
 		'''
