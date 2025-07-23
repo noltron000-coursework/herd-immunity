@@ -133,19 +133,6 @@ class Simulation:
 		else: return True
 
 
-	def infect_newly_infected(self):
-		'''
-		This method should iterate through the list of `._id` stored
-		in `self.newly_infected`, and update each `Person` object with the disease.
-		'''
-		# XXX TODO XXX
-		# Call this method at the end of every time step and infect each `Person`.
-
-		# XXX TODO XXX
-		# Once you have iterated through the entire list of `self.newly_infected`,
-		# remember to reset `self.newly_infected` back to an empty list.
-		pass
-
 	def run(self):
 		'''
 		This method should run the simulation until
@@ -245,6 +232,10 @@ class Simulation:
 		pass
 
 	def resolve_infections(self):
+		'''
+		This method takes sick people and kills a portion of them.
+		Then, it takes newly infected people and makes them sick.
+		'''
 		deaths = []
 		infections = []
 
