@@ -195,11 +195,35 @@ class Simulation:
 			at the end of each call of `self.time_step()`.
 		'''
 
-		# XXX TODO XXX
-		# Finish this method.
-		# XXX HINT XXX
-		# Newly infected people cannot die in the same step that they were infected in!
-		pass
+		MAX_NUM_INTERACTIONS = 100
+
+		sick_population = [
+			p for p in self.population
+			if p.is_alive and p.infection is not None
+		]
+
+		for sick_person in sick_population:
+			# Get a list of the people we can have interactions with.
+			possible_others = [
+				p for p in self.population
+				if p._id != sick_person._id and p.is_alive
+			]
+
+			# Limit the number of interactions.
+			num_interactions = min(
+				MAX_NUM_INTERACTIONS,
+				len(possible_others),
+			)
+
+			# Select random living people from the population.
+			random_people = random.sample(possible_others, num_interactions)
+
+			# Make each pair interact.
+			for other_person in random_people:
+				self.interaction(sick_person, other_person)
+
+		# Resolve who lives, who dies, and resolve dormant infections.
+		self.resolve_infections()
 
 	def interaction(self, person, random_person):
 		'''
