@@ -212,50 +212,34 @@ class Simulation(object):
 		Logger.log_results(self, time_step_counter, self.total_infected, self.total_deaths, self.population_size, self.population)
 		print(f'The simulation has ended after {time_step_counter} turns.')
 
-	# random_people() generates a list of random people.
-	# The number of interactions determines how many people.
-	def random_people(self, individual):
-		random_people = []
-		unchosen = self.population.copy()
-		# while the number of random people is less then interaction number
-		# and while length of unchosen population is not nothing
-		while (len(random_people) < self.num_interactions) and (len(unchosen) > 0):
-			random_select = random.randint(0,len(unchosen)-1)
-			random_person = unchosen.pop(random_select)
-			if (random_person.is_alive) and (random_person != individual):
-				random_people.append(random_person)
-		return random_people
-
-	'''
-	TODO: Finish this method! This method should contain all the basic logic for computing one time step in the simulation.  This includes:
-		- For each infected person in the population:
-				- Repeat for 100 total interactions:
-					- Grab a random person from the population.
-						- If the person is dead:
-							- continue and grab another new person from the population.
-							- Since we don't interact with dead people, this does not count as an interaction.
-						- Else:
-							- Call simulation.interaction(person, random_person)
-							- Increment interaction counter by 1.
-	'''
 	def time_step(self):
-		count_deaths = 0
-		count_infection = 0
-		for individual in self.population:
-			if individual.is_infected:
-				count_infection += 1
-			if individual.is_alive == False:
-				count_deaths += 1
-			self.total_deaths
-			if individual.is_infected and individual.is_alive == True and individual.is_vaccinated == False:
-				Logger.log_person(self, individual)
-				random_people = self.random_people(individual)
-				for person in random_people:
-					self.interaction(individual, person)
-					self.currently_infected
-			else:
-				continue
-		self.contagiousify()
+		sick_population = [
+			p for p in self.population
+			if p.is_alive and p.is_infected
+		]
+
+		for sick_person in sick_population:
+			# Get a list of the people we can have interactions with.
+			possible_others = [
+				p for p in self.population
+				if p._id != sick_person._id and p.is_alive
+			]
+
+			# Limit the number of interactions.
+			num_interactions = min(
+				self.num_interactions,
+				len(possible_others),
+			)
+
+			# Select random living people from the population.
+			random_people = random.sample(possible_others, num_interactions)
+
+			# Make each pair interact.
+			for other_person in random_people:
+				self.interaction(sick_person, other_person)
+
+		# Resolve who lives, who dies, and resolve dormant infections.
+		self.resolve_infections()
 
 	# TODO: Finish this method! This method should be called any time two living people are selected for an interaction.  That means that only living people should be passed into this method.  Assert statements are included to make sure that this doesn't happen.
 	'''
@@ -301,7 +285,7 @@ class Simulation(object):
 	NOTE: Once you have iterated through the entire list of self.newly_infected, remember to reset self.newly_infected back to an empty list!
 	'''
 
-	def contagiousify(self):
+	def resolve_infections(self):
 		Logger.log_infection_kickoff(self)
 		for person in self.currently_infected:
 			Logger.log_infection_survival(self, person, person.resolve_infection(self.mortality_rate))
