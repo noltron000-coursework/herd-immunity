@@ -22,15 +22,12 @@ class Person:
 		# We start out with `is_alive = True`, because we don't make vampires or zombies.
 		# All other values will be set by the simulation when it makes each Person object.
 
-		# XXX TODO XXX
-		# Set the following properties to something - they shouldn't be None.
-
-		self._id = None # type: int # FIXME
+		self._id = _id # type: int
 		self.is_alive = True # type: bool
-		self.is_vaccinated = None # type: bool # FIXME
-		self.infection = None # type: Virus | None # FIXME
+		self.is_vaccinated = is_vaccinated # type: bool
+		self.infection = infection # type: Virus | None
 
-	def did_survive_infection(self):
+	def resolve_infection(self):
 		'''
 		Generate a random number and compare it to the `mortality_rate`.
 		If random number is smaller, `Person` dies from the disease.
@@ -38,9 +35,24 @@ class Person:
 		Return a boolean value indicating whether or not they survived the infection.
 		'''
 
-		# XXX TODO XXX
-		# Finish this method - it should return a boolean.
-		pass
+		if self.infection is None:
+			# The person is not infected. They live.
+			return True
+
+		# Randomly determine if person dies,
+		# based on the virus' mortality rate.
+		dice_roll = random.random()
+
+		if dice_roll < self.infection.mortality_rate:
+			# The person dies...
+			self.is_alive = False
+			self.is_vaccinated = False
+			self.infection = None
+			return False
+		else:
+			# The person lives!
+			self.is_vaccinated = True
+			return True
 
 ##############
 # Unit Tests #
