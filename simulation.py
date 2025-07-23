@@ -155,10 +155,10 @@ class Simulation(object):
 		# it determines if the end is neigh, for better or worse.
 		# if the end isn't neigh, the program will continue (return True)
 		for person in self.population:
-			if person.alive:
+			if person.is_alive:
 				end_death = False # person is alive (not everyone dead)
-				if person.infected != None and person.vaccinated == False:
-					print("person # " + str(person.identity) + " is alive")
+				if person.is_infected and person.is_vaccinated == False:
+					print("person # " + str(person._id) + " is alive")
 					print("   ...and sick, and unvaccinated")
 					end_alive = False # person is alive, vaccinated, and infected (infection continues)
 			if end_alive == False: # found a sick person. no need to continue the loop anymore.
@@ -222,7 +222,7 @@ class Simulation(object):
 		while (len(random_people) < self.num_interactions) and (len(unchosen) > 0):
 			random_select = random.randint(0,len(unchosen)-1)
 			random_person = unchosen.pop(random_select)
-			if (random_person.alive) and (random_person != individual):
+			if (random_person.is_alive) and (random_person != individual):
 				random_people.append(random_person)
 		return random_people
 
@@ -242,12 +242,12 @@ class Simulation(object):
 		count_deaths = 0
 		count_infection = 0
 		for individual in self.population:
-			if individual.infected == True:
+			if individual.is_infected:
 				count_infection += 1
-			if individual.alive == False:
+			if individual.is_alive == False:
 				count_deaths += 1
 			self.total_deaths
-			if individual.infected != None and individual.alive == True and individual.vaccinated == False:
+			if individual.is_infected and individual.is_alive == True and individual.is_vaccinated == False:
 				Logger.log_person(self, individual)
 				random_people = self.random_people(individual)
 				for person in random_people:
@@ -272,14 +272,14 @@ class Simulation(object):
 	'''
 	def interaction(self, individual, random_person):
 		did_infect = None
-		assert individual.alive == True
-		assert random_person.alive == True
+		assert individual.is_alive == True
+		assert random_person.is_alive == True
 		for person in self.newly_infected:
-			if person.identity == random_person.identity:
+			if person._id == random_person._id:
 				did_infect = False
 				break
 		if did_infect == None:
-			if (random_person.vaccinated == True or random_person.infected != None):
+			if (random_person.is_vaccinated == True or random_person.is_infected):
 				did_infect = False
 			else:
 				infection_rand = random.random()
@@ -306,21 +306,21 @@ class Simulation(object):
 		for person in self.currently_infected:
 			Logger.log_infection_survival(self, person, person.resolve_infection(self.mortality_rate))
 		for person in self.newly_infected:
-			person.infected = self.virus_name
+			person.is_infected = True
 		self.currently_infected = self.newly_infected.copy()
 		self.newly_infected = []
 
 	def count_infections(self):
 		counter = 0
 		for person in self.population:
-			if person.infected != None:
+			if person.is_infected:
 				counter += 1
 		return counter
 
 	def count_deaths(self):
 		counter = 0
 		for person in self.population:
-			if person.alive == False:
+			if person.is_alive == False:
 				counter += 1
 		return counter
 
