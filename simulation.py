@@ -199,7 +199,7 @@ class Simulation:
 
 		sick_population = [
 			p for p in self.population
-			if p.is_alive and p.is_infected
+			if p.is_alive and p.infection is not None
 		]
 
 		for sick_person in sick_population:
