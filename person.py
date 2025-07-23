@@ -31,17 +31,17 @@ class Person:
 
 	def resolve_infection(self):
 		'''
-		Generate a random number and compare it to the `mortality_rate`.
-		If random number is smaller, `Person` dies from the disease.
+		Generates a random number and compare it to the `mortality_rate`.
+		If the random number is smaller, then `Person` dies from the disease.
 		If the `Person` survives, then they become vaccinated, and they have no infection.
-		Return a boolean value indicating whether or not they survived the infection.
+		Returns a boolean value indicating whether or not they survived the infection.
 		'''
 
 		if self.infection is None:
 			# The person is not infected. They live.
 			return True
 
-		# Randomly determine if person dies,
+		# Randomly determine if the person dies,
 		# based on the virus' mortality rate.
 		dice_roll = random.random()
 
@@ -54,6 +54,7 @@ class Person:
 		else:
 			# The person lives!
 			self.is_vaccinated = True
+			self.infection = None
 			return True
 
 ##############
