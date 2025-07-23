@@ -42,7 +42,11 @@ class Person:
 		Determines whether or not a person gets sick from being exposed.
 		'''
 
-		if self.is_vaccinated:
+		if self.infection is not None:
+			# The person is already sick, they can't get sick again.
+			return False
+
+		elif self.is_vaccinated:
 			# The person is vaccinated. They can't get sick.
 			return False
 
