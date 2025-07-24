@@ -151,7 +151,7 @@ class Simulation:
 		# First, kill sick people.
 		for infected in self.population.filter(is_dormant=False):
 			survives = infected.resolve_infection()
-			if not survives: newly_immune.append(infected)
+			if survives: newly_immune.append(infected)
 			else: new_deaths.append(infected)
 
 		# Then, make dormant infections active.
