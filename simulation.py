@@ -74,28 +74,16 @@ class Simulation:
 		all requirements for ending the simulation are met.
 		'''
 
+		# Log some initial information...
+		self.logger.log_metadata(self.population, self.virus)
+
 		# Keeps track of the number of time steps that have passed.
 		num_cycles = 0
-
-		# Log the initial cycle (cycle 0),
-		# which shows information about the population before anyone has died.
-		self.logger.log_cycle(
-			num_cycles = num_cycles,
-			num_new_infections = self.population.initial_infections,
-			num_newly_immune = 0,
-			num_new_deaths = 0,
-			total_alive = len(self.population.filter(is_alive=True)),
-			total_deaths = len(self.population.filter(is_alive=False)),
-			total_immune = len(self.population.filter(is_vaccinated=True)),
-		)
 
 		# Runs until the simulation completes.
 		while self.should_continue():
 			num_cycles += 1
 			self.cycle_step(num_cycles)
-
-		# Call final logger method...
-		self.logger.log_results(num_cycles)
 
 	def cycle_step(self, num_cycles):
 		'''
@@ -151,7 +139,7 @@ class Simulation:
 		# First, kill sick people.
 		for infected in self.population.filter(is_dormant=False):
 			survives = infected.resolve_infection()
-			if not survives: newly_immune.append(infected)
+			if survives: newly_immune.append(infected)
 			else: new_deaths.append(infected)
 
 		# Then, make dormant infections active.
