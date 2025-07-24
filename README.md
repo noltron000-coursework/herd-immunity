@@ -249,13 +249,13 @@ Complete the logic in the following methods:
 	Follow the comment instructions to initialize this class.
 - `self.create_population()`:
 	You'll need to create a population by creating new `Person` classes.
-- `self.simulation_should_continue()`:
+- `self.should_continue()`:
 	Determines whether the simulation should continue based on the state of the population.
 	Check this out before each `time_step`.
 - `self.infect_newly_infected()`:
 	Newly infected people cannot also die from the virus on the same step, so we have to process them seperately.
 - `self.run()`:
-	This method will create a cycle with a `while` loop until `self.simulation_should_continue()` returns `False`.
+	This method will create a cycle with a `while` loop until `self.should_continue()` returns `False`.
 - `self.time_step()`:
 	This is where the interactions between an infected person and a random person from the population will be called.
 	Hopefully, implementing this will help you deconstruct steps in `self.run()` and make it easier to read!
