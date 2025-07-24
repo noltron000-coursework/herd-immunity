@@ -26,6 +26,8 @@ class Population:
 		# For now we will store the vaccination rate and initial infections in this class.
 		self.vaccination_rate: float = vaccination_rate
 		self.initial_infections: int = initial_infections
+		initial_vaccinations = math.floor(vaccination_rate * population_size)
+		self.initial_vaccinations: int = initial_vaccinations
 
 		# Create a population based on the given population size.
 		self.list: list[Person] = []
@@ -34,7 +36,6 @@ class Population:
 			self.list.append(person)
 
 		# For our purposes, it's fine to vaccinate and infect the population right away.
-		initial_vaccinations = math.floor(vaccination_rate * self.size)
 		self.vaccinate_population(initial_vaccinations)
 		self.infect_population(virus, initial_infections)
 
