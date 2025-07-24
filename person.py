@@ -7,18 +7,13 @@ from virus import Virus
 ################
 
 class Person:
-	'''
-	The simulation will contain people, who make up a population.
-	'''
+	'''The simulation will contain people, who make up a population.'''
 
 	@property
-	def is_infected(self):
-		return self.infection is not None
+	def is_infected(self): return self.infection is not None
 
 	def __init__(self, _id: int, is_vaccinated = False, infection: Virus | None = None):
-		'''
-		Initializes a new person.
-		'''
+		'''Initializes a new person.'''
 
 		self._id = _id # type: int
 		self.is_vaccinated = is_vaccinated # type: bool
@@ -38,9 +33,7 @@ class Person:
 		self.is_dormant = False
 
 	def resolve_exposure(self, virus: Virus):
-		'''
-		Determines whether or not a person gets sick from being exposed.
-		'''
+		'''Determines whether or not a person gets sick from being exposed.'''
 
 		if self.infection is not None:
 			# The person is already sick, they can't get sick again.
