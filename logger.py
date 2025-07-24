@@ -1,3 +1,6 @@
+from population import Population
+from virus import Virus
+
 ################
 # Logger Class #
 ################
@@ -16,10 +19,8 @@ class Logger(object):
 
 	@staticmethod
 	def generate_file_name(
-			virus_name,
-			population_size,
-			vaccination_rate,
-			initial_infected,
+			population: Population,
+			virus: Virus,
 		):
 		'''
 		This static method generates a logfile name and returns it,
@@ -28,7 +29,7 @@ class Logger(object):
 
 		# XXX CHALLENGE XXX
 		# Can you refactor this next line by using Python3's "f-string" format?
-		name = "sim_{}_pop_{}_vac_{}_inf_{}.txt".format(virus_name, population_size, vaccination_rate, initial_infected)
+		name = "sim_{}_pop_{}_vac_{}_inf_{}.txt".format(virus.name, population.size, population.vaccination_rate, population.initial_infections)
 		return name.lower()
 
 	def __init__(self, file_name):
@@ -149,26 +150,26 @@ class Logger(object):
 		# Append the results of the infection to the logfile.
 		pass
 
-	def log_time_step(self, time_step_number):
-		'''
-		XXX CHALLENGE XXX
-		Here is an opportunity for a stretch challenge!
+	def log_cycle(
+			self,
+			num_cycles,
+			num_new_infections: int,
+			num_newly_immune: int,
+			num_new_deaths: int,
+			total_alive: int,
+			total_immune: int,
+			total_deaths: int,
+		):
+		'''This writes summary statistics to the logfile.'''
 
-		If you choose to extend this method,
-		the format of the summary statistics logged are up to you.
+		# XXX TODO XXX
+		# Write the data to the logfile, instead of printing it.
 
-		At minimum, it should contain:
-		- The number of people that were infected during this specific time step.
-		- The number of people that died on this specific time step.
-		- The total number of people infected in the population
-			(including the newly infected).
-		- The total number of dead, including those that died during this time step.
-
-		The format of this log should be:
-		- `"Time step {time_step_number} ended, beginning {time_step_number + 1}\\n"`
-		'''
-
-		# XXX CHALLENGE XXX
-		# Finish this method.
-		# This method should log when a time step ends, and a new one begins.
-		pass
+		print(f"------ CYCLE {num_cycles} ------")
+		print(f"   new cases: {num_new_infections}")
+		print(f"newly immune: {num_newly_immune}")
+		print(f"  new deaths: {num_new_deaths}")
+		print(f" total alive: {total_alive}")
+		print(f"total immune: {total_immune}")
+		print(f"total deaths: {total_deaths}")
+		print()
