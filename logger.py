@@ -1,11 +1,12 @@
+from population import Population
+from virus import Virus
+
 ################
 # Logger Class #
 ################
 
 class Logger(object):
-	'''
-	Utility class responsible for logging simulation interactions to a file.
-	'''
+	'''Utility class responsible for logging simulation interactions to a file.'''
 
 	# XXX TODO XXX
 	# Write a test suite for this class to make sure each method is working as expected.
@@ -15,20 +16,19 @@ class Logger(object):
 	# that way you can test them one by one as you write your class.
 
 	@staticmethod
-	def generate_file_name(
-			virus_name,
-			population_size,
-			vaccination_rate,
-			initial_infected,
-		):
+	def generate_file_name(population: Population, virus: Virus):
 		'''
 		This static method generates a logfile name and returns it,
 		based on a few parameters about the simulation (as listed).
 		'''
 
-		# XXX CHALLENGE XXX
-		# Can you refactor this next line by using Python3's "f-string" format?
-		name = "sim_{}_pop_{}_vac_{}_inf_{}.txt".format(virus_name, population_size, vaccination_rate, initial_infected)
+		name = (
+			f"sim_{virus.name}_"
+			f"pop_{population.size}_"
+			f"vac_{population.vaccination_rate}_"
+			f"inf_{population.initial_infections}.txt"
+		)
+
 		return name.lower()
 
 	def __init__(self, file_name):
@@ -38,60 +38,60 @@ class Logger(object):
 		of the file that the logs will be written to.
 		'''
 
-		# XXX TODO XXX
-		# Finish this initialization method.
-		self.file_name = None # type: str # FIXME
+		self.file_name = file_name # type: str
 
-	def log_metadata(
-			self,
-			virus,
-			population_size,
-			vaccination_rate,
-		):
+		print() # Add some space for legibility within the terminal.
+
+		# XXX NOTE XXX
+		# Use 'w' mode when you open the file to overwrite the old data with the new.
+		# For all other methods, use the 'a' mode to append a new log to the end.
+		logfile = open(self.file_name, "w")
+		logfile.close()
+
+	def write(self, content: str, verbose = True):
+		'''Writes the given content to the logfile.'''
+		# Print the given content to console if `verbose = true`.
+		if verbose: print(content)
+
+		# XXX NOTE XXX
+		# Use 'a' mode to append content to the logfile.
+		logfile = open(self.file_name, "a")
+
+		# Write the given content...
+		logfile.write(content)
+		logfile.write('\n') # This newline helps emulate the behavior of print statements.
+
+		# Close the file - leaving it open can cause problems elsewhere.
+		logfile.close()
+
+	def log_metadata(self, population: Population, virus: Virus):
 		'''
 		The simulation class should use this method immediately to log
 		the specific parameters of the simulation as the first line of the file.
 		'''
 
 		# XXX TODO XXX
-		# Finish this method.
-		# It should create the text file that we will store all logs in.
+		# The basic header information is pretty bare-bones for now.
+		# I can't really think of anything else that would need to go here.
+		# Maybe an author field and a creation timestamp?
+		content = (
+			"====== HERD IMMUNITY SIMULATION ======\n"
+			f"Virus Name: {virus.name}\n"
+		)
+		self.write(content)
 
-		# XXX HINT XXX
-		# Use 'w' mode when you open the file to overwrite the old data with the new.
-		# For all other methods, use the 'a' mode to append a new log to the end.
-
-		results_file = open(self.file_name, "w")
-
-		# XXX HINT XXX
-		# The following code is incorrect and incomplete.
-		# Make sure to end every line with a '/n' character
-		# to ensure that each event logged ends up on a separate line!
-		results_file.write("Simulation for virus: {}".format(virus.name))
-		results_file.write("More content...!")
-		results_file.write("More content...!")
-		results_file.write("More content...!")
-
-		# Close the file - leaving it open can cause problems elsewhere.
-		results_file.close()
-
-	def log_results(self, num_cycles):
-		'''
-		Logs the results of the simulation to the file.
-		Should include at least three strings:
-		- "Simulation ended after {num_cycles} turns."
-		- "Total Dead: {num_deaths}."
-		- "Total Vaccinated: {num_vaccinated}."
-		'''
-
-		f"The simulation has ended after {num_cycles} turns."
-
-		# XXX TODO XXX
-		# Complete this method.
-
-		# XXX HINT XXX
-		# You will have to add or change parameters for some functions in this project!
-		pass
+		# XXX NOTE XXX
+		# We will want to log "Cycle Zero" right away as part of initialization.
+		# This shows a summary of some important data cleanly, before anyone dies.
+		self.log_cycle(
+			num_cycles = 0,
+			num_new_infections = population.initial_infections,
+			num_newly_immune = 0,
+			num_new_deaths = 0,
+			total_alive = population.size,
+			total_deaths = 0,
+			total_immune = population.initial_vaccinations,
+		)
 
 	def log_interaction(
 			self,
@@ -149,26 +149,25 @@ class Logger(object):
 		# Append the results of the infection to the logfile.
 		pass
 
-	def log_time_step(self, time_step_number):
-		'''
-		XXX CHALLENGE XXX
-		Here is an opportunity for a stretch challenge!
+	def log_cycle(
+			self,
+			num_cycles,
+			num_new_infections: int,
+			num_newly_immune: int,
+			num_new_deaths: int,
+			total_alive: int,
+			total_immune: int,
+			total_deaths: int,
+		):
+		'''This writes summary statistics to the logfile.'''
 
-		If you choose to extend this method,
-		the format of the summary statistics logged are up to you.
-
-		At minimum, it should contain:
-		- The number of people that were infected during this specific time step.
-		- The number of people that died on this specific time step.
-		- The total number of people infected in the population
-			(including the newly infected).
-		- The total number of dead, including those that died during this time step.
-
-		The format of this log should be:
-		- `"Time step {time_step_number} ended, beginning {time_step_number + 1}\\n"`
-		'''
-
-		# XXX CHALLENGE XXX
-		# Finish this method.
-		# This method should log when a time step ends, and a new one begins.
-		pass
+		logs = (
+			f"------ CYCLE {num_cycles} ------\n"
+			f"   new cases: {num_new_infections}\n"
+			f"newly immune: {num_newly_immune}\n"
+			f"  new deaths: {num_new_deaths}\n"
+			f" total alive: {total_alive}\n"
+			f"total immune: {total_immune}\n"
+			f"total deaths: {total_deaths}\n"
+		)
+		self.write(logs)

@@ -1,0 +1,147 @@
+====== HERD IMMUNITY SIMULATION ======
+Virus Name: Ebola
+
+------ CYCLE 0 ------
+   new cases: 10
+newly immune: 0
+  new deaths: 0
+ total alive: 100000
+total immune: 90000
+total deaths: 0
+
+------ CYCLE 1 ------
+   new cases: 13
+newly immune: 2
+  new deaths: 8
+ total alive: 99992
+total immune: 90002
+total deaths: 8
+
+------ CYCLE 2 ------
+   new cases: 34
+newly immune: 5
+  new deaths: 8
+ total alive: 99984
+total immune: 90007
+total deaths: 16
+
+------ CYCLE 3 ------
+   new cases: 84
+newly immune: 9
+  new deaths: 25
+ total alive: 99959
+total immune: 90016
+total deaths: 41
+
+------ CYCLE 4 ------
+   new cases: 207
+newly immune: 27
+  new deaths: 57
+ total alive: 99902
+total immune: 90043
+total deaths: 98
+
+------ CYCLE 5 ------
+   new cases: 501
+newly immune: 59
+  new deaths: 148
+ total alive: 99754
+total immune: 90102
+total deaths: 246
+
+------ CYCLE 6 ------
+   new cases: 1091
+newly immune: 159
+  new deaths: 342
+ total alive: 99412
+total immune: 90261
+total deaths: 588
+
+------ CYCLE 7 ------
+   new cases: 1892
+newly immune: 342
+  new deaths: 749
+ total alive: 98663
+total immune: 90603
+total deaths: 1337
+
+------ CYCLE 8 ------
+   new cases: 2286
+newly immune: 576
+  new deaths: 1316
+ total alive: 97347
+total immune: 91179
+total deaths: 2653
+
+------ CYCLE 9 ------
+   new cases: 1640
+newly immune: 689
+  new deaths: 1597
+ total alive: 95750
+total immune: 91868
+total deaths: 4250
+
+------ CYCLE 10 ------
+   new cases: 753
+newly immune: 526
+  new deaths: 1114
+ total alive: 94636
+total immune: 92394
+total deaths: 5364
+
+------ CYCLE 11 ------
+   new cases: 269
+newly immune: 212
+  new deaths: 541
+ total alive: 94095
+total immune: 92606
+total deaths: 5905
+
+------ CYCLE 12 ------
+   new cases: 82
+newly immune: 89
+  new deaths: 180
+ total alive: 93915
+total immune: 92695
+total deaths: 6085
+
+------ CYCLE 13 ------
+   new cases: 25
+newly immune: 20
+  new deaths: 62
+ total alive: 93853
+total immune: 92715
+total deaths: 6147
+
+------ CYCLE 14 ------
+   new cases: 10
+newly immune: 2
+  new deaths: 23
+ total alive: 93830
+total immune: 92717
+total deaths: 6170
+
+------ CYCLE 15 ------
+   new cases: 3
+newly immune: 3
+  new deaths: 7
+ total alive: 93823
+total immune: 92720
+total deaths: 6177
+
+------ CYCLE 16 ------
+   new cases: 2
+newly immune: 0
+  new deaths: 3
+ total alive: 93820
+total immune: 92720
+total deaths: 6180
+
+------ CYCLE 17 ------
+   new cases: 0
+newly immune: 0
+  new deaths: 2
+ total alive: 93818
+total immune: 92720
+total deaths: 6182
+
