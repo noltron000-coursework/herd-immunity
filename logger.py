@@ -29,7 +29,7 @@ class Logger(object):
 
 		# XXX CHALLENGE XXX
 		# Can you refactor this next line by using Python3's "f-string" format?
-		name = "sim_{}_pop_{}_vac_{}_inf_{}.txt".format(virus.name, population.size, population.vaccination_rate, population.initial_infected)
+		name = "sim_{}_pop_{}_vac_{}_inf_{}.txt".format(virus.name, population.size, population.vaccination_rate, population.initial_infections)
 		return name.lower()
 
 	def __init__(self, file_name):

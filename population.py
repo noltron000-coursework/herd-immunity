@@ -16,69 +16,68 @@ class Population:
 
 	def __init__(
 		self,
-		size: int,
+		population_size: int,
 		vaccination_rate: float,
-		initial_infected: int,
+		initial_infections: int,
 		virus: Virus,
 	):
+		# For now we will store the vaccination rate and initial infections in this class.
+		self.vaccination_rate: float = vaccination_rate
+		self.initial_infections: int = initial_infections
 
-		self.size = size # type: int
-		self.vaccination_rate = vaccination_rate # type: float
-		self.initial_infected = initial_infected # type: int
-
-		# Generate a population with the correct number of vaccinations and infections.
-		self.list = self.populate(virus) # type: list[Person]
-
-	def populate(self, virus: Virus):
-		'''
-		1. This method will create the initial population (a list of `Person` objects)\
-			based on the given population size.
-		2. Then, the method will vaccinate a percentage of them from a virus.
-		3. Finally, it will infect a given number of people in the population.\
-			If too many people are vaccinated to reach the set number,\
-			then as many unvaccinated people as possible are infected.
-		4. The method returns the generated list.
-
-		Returns:
-			list:
-				A list of `Person` objects.
-		'''
-
+		# This will create a population (a list of `Person` objects)
+		# based on the given population size.
 		# Initialize a list of person objects.
-		population: list[Person] = []
-		for _id in range(self.size):
+		self.list: list[Person] = []
+		for _id in range(population_size):
 			person = Person(_id)
-			population.append(person)
+			self.list.append(person)
 
-		# Determine how many people to vaccinate.
-		num_vaccinated = self.size * self.vaccination_rate
-		num_vaccinated = math.floor(num_vaccinated)
+		# For our purposes, it's fine to vaccinate and infect the population right away.
+
+		# Determine how many people to vaccinate, and who to infect.
+		initial_vaccinations = math.floor(vaccination_rate * self.size)
+		self.vaccinate_population(initial_vaccinations)
+		self.infect_population(virus, initial_infections)
+
+	@property
+	def size(self): return len(self.list)
+
+	def vaccinate_population(self, num_vaccinations: int):
+		'''
+		This method will vaccinate an amount of the population.
+		It assumes that `Population.list` has already been generated.
+		'''
+		# We can only vaccinate people who aren't already sick or vaccinated.
+		can_be_vaccinated = self.filter(is_infected=False, is_vaccinated=False)
+		num_vaccinations = min(num_vaccinations, len(can_be_vaccinated))
+
+		# XXX TODO XXX
+		# Add a log event a situation: can't vaccinate given number of people.
+		# The number cannot be reached; too many people are vaccinated or sick already.
 
 		# Vaccinate a random set of the population.
-		people_to_vaccinate = random.sample(population, num_vaccinated)
+		people_to_vaccinate = random.sample(can_be_vaccinated, num_vaccinations)
 		for person in people_to_vaccinate:
 			person.is_vaccinated = True
 
-		# Determine the remaining unvaccinated population.
-		unvaccinated_population = self.filter(is_vaccinated=False)
+	def infect_population(self, virus: Virus, num_infections: int):
+		'''
+		This method will infect an amount of the population with the given virus.
+		It assumes that `Population.list` has already been generated.
+		'''
+		# We can only infect people who aren't already sick or vaccinated.
+		can_be_infected = self.filter(is_infected=False, is_vaccinated=False)
+		num_infections = min(num_infections, len(can_be_infected))
 
-		# Next, determine if we can infect the correct number of people.
-		if self.initial_infected > len(unvaccinated_population):
-			# We cannot - too many people are vaccinated!
-			# The server must adjust the number of initially infected people.
-			self.initial_infected = len(unvaccinated_population)
-
-			# XXX TODO XXX
-			# Add a log event of this situation.
-			# The number of initial infected cannot be reached;
-			# there are too many vaccinated people in the population.
+		# XXX TODO XXX
+		# Add a log event a situation: can't infect given number of people.
+		# The number cannot be reached; too many people are vaccinated or sick already.
 
 		# Infect a random set of the population (that is not vaccinated).
-		people_to_infect = random.sample(unvaccinated_population, self.initial_infected)
+		people_to_infect = random.sample(can_be_infected, num_infections)
 		for person in people_to_infect:
 			person.infection = virus
-
-		return population
 
 	def filter(
 		self,
