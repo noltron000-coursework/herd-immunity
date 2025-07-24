@@ -1,3 +1,6 @@
+from population import Population
+from virus import Virus
+
 ################
 # Logger Class #
 ################
@@ -16,10 +19,8 @@ class Logger(object):
 
 	@staticmethod
 	def generate_file_name(
-			virus_name,
-			population_size,
-			vaccination_rate,
-			initial_infected,
+			population: Population,
+			virus: Virus,
 		):
 		'''
 		This static method generates a logfile name and returns it,
@@ -28,7 +29,7 @@ class Logger(object):
 
 		# XXX CHALLENGE XXX
 		# Can you refactor this next line by using Python3's "f-string" format?
-		name = "sim_{}_pop_{}_vac_{}_inf_{}.txt".format(virus_name, population_size, vaccination_rate, initial_infected)
+		name = "sim_{}_pop_{}_vac_{}_inf_{}.txt".format(virus.name, population.size, population.vaccination_rate, population.initial_infected)
 		return name.lower()
 
 	def __init__(self, file_name):
