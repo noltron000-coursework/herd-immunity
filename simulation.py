@@ -77,17 +77,27 @@ class Simulation:
 		# Keeps track of the number of time steps that have passed.
 		num_cycles = 0
 
+		# Log the initial cycle (cycle 0),
+		# which shows information about the population before anyone has died.
+		self.logger.log_cycle(
+			num_cycles = num_cycles,
+			num_new_infections = self.population.initial_infections,
+			num_newly_immune = 0,
+			num_new_deaths = 0,
+			total_alive = len(self.population.filter(is_alive=True)),
+			total_deaths = len(self.population.filter(is_alive=False)),
+			total_immune = len(self.population.filter(is_vaccinated=True)),
+		)
+
 		# Runs until the simulation completes.
 		while self.should_continue():
 			num_cycles += 1
-			print(f"=== TURN {num_cycles} ===")
-			self.time_step()
-			self.logger.log_time_step(num_cycles)
+			self.cycle_step(num_cycles)
 
 		# Call final logger method...
 		self.logger.log_results(num_cycles)
 
-	def time_step(self):
+	def cycle_step(self, num_cycles):
 		'''
 		This method should contain all the logic
 		for computing one time step-in the simulation.
@@ -100,11 +110,14 @@ class Simulation:
 
 		MAX_NUM_INTERACTIONS = 100
 
-		sick_population = [
-			p for p in self.population.list
-			if p.is_alive and p.infection is not None
-		]
+		# * STEP 1 *
+		# Gather a list of sick people, and loop over them.
+		sick_population = self.population.filter(
+			is_infected=True,
+			is_dormant=False,
+		)
 
+		# Each person needs to interact with 100 other people.
 		for sick_person in sick_population:
 			# Get a list of the people we can have interactions with.
 			possible_others = [
@@ -125,8 +138,38 @@ class Simulation:
 			for other_person in random_people:
 				self.interaction(sick_person, other_person)
 
+		# * STEP 2 *
 		# Resolve who lives, who dies, and resolve dormant infections.
-		self.resolve_infections()
+		#
+		# XXX NOTE XXX
+		# Infected people can't die on the same cycle
+		# that they caught their infection!
+		new_infections = []
+		newly_immune = []
+		new_deaths = []
+
+		# First, kill sick people.
+		for infected in self.population.filter(is_dormant=False):
+			survives = infected.resolve_infection()
+			if not survives: newly_immune.append(infected)
+			else: new_deaths.append(infected)
+
+		# Then, make dormant infections active.
+		for infected in self.population.filter(is_dormant=True):
+			infected.is_dormant = False
+			new_infections.append(infected)
+
+		# * STEP 3 *
+		# Log the number of deaths and infections, etc.
+		self.logger.log_cycle(
+			num_cycles = num_cycles,
+			num_new_infections = len(new_infections),
+			num_newly_immune = len(newly_immune),
+			num_new_deaths = len(new_deaths),
+			total_alive = len(self.population.filter(is_alive=True)),
+			total_deaths = len(self.population.filter(is_alive=False)),
+			total_immune = len(self.population.filter(is_vaccinated=True)),
+		)
 
 	def interaction(self, person1: Person, person2: Person):
 		'''
@@ -163,33 +206,6 @@ class Simulation:
 
 			# Resolve the exposure...
 			healthy_person.resolve_exposure(sick_person.infection)
-
-	def resolve_infections(self):
-		'''
-		This method takes sick people and kills a portion of them.
-		Then, it takes newly infected people and makes them sick.
-		'''
-		new_deaths = []
-		new_infections = []
-
-		for infected in self.population.filter(is_dormant=False):
-			survives = infected.resolve_infection()
-			if not survives: new_deaths.append(infected)
-
-		for infected in self.population.filter(is_dormant=True):
-			infected.is_dormant = False
-			new_infections.append(infected)
-
-		print(f"   new cases: {len(new_infections)}")
-		print(f"  new deaths: {len(new_deaths)}")
-		print(f" total alive: {len(self.population.filter(is_alive=True))}")
-		print(f"total deaths: {len(self.population.filter(is_alive=False))}")
-		print(f"total immune: {len(self.population.filter(is_vaccinated=True))}")
-		print()
-
-		# XXX TODO XXX
-		# Log the number of deaths and infections somewhere.
-
 
 ##################
 # CLI Entrypoint #
