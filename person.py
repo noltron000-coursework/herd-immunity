@@ -37,6 +37,32 @@ class Person:
 		# If there is no infection, then this must be set to `False`.
 		self.is_dormant = False
 
+	def resolve_exposure(self, virus: Virus):
+		'''
+		Determines whether or not a person gets sick from being exposed.
+		'''
+
+		if self.infection is not None:
+			# The person is already sick, they can't get sick again.
+			return False
+
+		elif self.is_vaccinated:
+			# The person is vaccinated. They can't get sick.
+			return False
+
+		# Randomly determine if the person gets sick,
+		# based on the virus' reproduction rate.
+		dice_roll = random.random()
+
+		if dice_roll < virus.reproduction_rate:
+			# The person gets infected...
+			self.infection = virus
+			self.is_dormant = True
+			return True
+		else:
+			# The person got lucky!
+			return False
+
 	def resolve_infection(self):
 		'''
 		Generates a random number and compare it to the `mortality_rate`.

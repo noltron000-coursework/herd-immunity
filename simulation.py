@@ -122,29 +122,16 @@ class Simulation:
 				`True` for simulation should continue, `False` if it should end.
 		'''
 		# Everyone is dead!
-		if len(self.get_alive()) == 0:
+		if len(self.filter_population(is_alive=True)) == 0:
 			return False
 
 		# No one is infected!
-		elif len(self.get_infected()) == 0:
+		elif len(self.filter_population(is_infected=True)) == 0:
 			return False
 
 		# Simulation needs to continue.
 		else: return True
 
-
-	def infect_newly_infected(self):
-		'''
-		This method should iterate through the list of `._id` stored
-		in `self.newly_infected`, and update each `Person` object with the disease.
-		'''
-		# XXX TODO XXX
-		# Call this method at the end of every time step and infect each `Person`.
-
-		# XXX TODO XXX
-		# Once you have iterated through the entire list of `self.newly_infected`,
-		# remember to reset `self.newly_infected` back to an empty list.
-		pass
 
 	def run(self):
 		'''
@@ -158,6 +145,7 @@ class Simulation:
 		# Runs until the simulation completes.
 		while self.should_continue():
 			num_cycles += 1
+			print(f"=== TURN {num_cycles} ===")
 			self.time_step()
 			self.logger.log_time_step(num_cycles)
 
@@ -205,71 +193,119 @@ class Simulation:
 		# Resolve who lives, who dies, and resolve dormant infections.
 		self.resolve_infections()
 
-	def interaction(self, person, random_person):
+	def interaction(self, person1: Person, person2: Person):
 		'''
-		This method should be called any time two living people
-		are selected for an interaction.
-		It assumes that only living people are passed in as parameters.
+		This method should be called any time two people are selected for an interaction.
 
 		Args:
-			person1 (person): The initial infected person
-			random_person (person): The person that person1 interacts with.
+			person1 (Person): One of the two people interacting.
+			person2 (Person): One of the two people interacting.
 		'''
 
 		# Assert statements are included to make sure
 		# that only living people are passed in as params.
-		assert person.is_alive == True
-		assert random_person.is_alive == True
+		assert person1.is_alive == True
+		assert person2.is_alive == True
 
-		# XXX TODO XXX
-		# Finish this method.
+		# Determine if someone getting sick is even possible.
+		if person1.infection == person2.infection:
+			# Both people are sick (or neither are sick)!
+			# Nothing happens in either scenario.
+			pass
 
-		# The possible cases you'll need to cover are listed in the docstring below:
-		'''
-		`random_person` is vaccinated:
-			Nothing happens to random person.
+		# One person must be sick, and the other is not.
+		# This may cause an infection...
+		else:
+			# Determine who is sick, and who is not.
+			sick_person: Person
+			healthy_person: Person
+			if person1.infection != None:
+				sick_person = person1
+				healthy_person = person2
+			else:
+				sick_person = person2
+				healthy_person = person1
 
-		`random_person` is already infected:
-			Nothing happens to random person.
-
-		`random_person` is healthy, but unvaccinated:
-			Generate a random number between 0 and 1.
-
-			If that number is smaller than `repro_rate`, `random_person`'s ID should be
-			appended to `Simulation` object's `newly_infected` array, so that their
-			`.infected` attribute can be changed to True at the end of the time step.
-		'''
-
-		# XXX TODO XXX
-		# Call slogger method during this method.
-		pass
+			# Resolve the exposure...
+			healthy_person.resolve_exposure(sick_person.infection)
 
 	def resolve_infections(self):
-		deaths = []
-		infections = []
+		'''
+		This method takes sick people and kills a portion of them.
+		Then, it takes newly infected people and makes them sick.
+		'''
+		new_deaths = []
+		new_infections = []
 
-		for infected in self.get_infected(is_dormant=False):
-			died = infected.resolve_infection()
-			if died: deaths.append(infected)
+		for infected in self.filter_population(is_dormant=False):
+			survives = infected.resolve_infection()
+			if not survives: new_deaths.append(infected)
 
-		for infected in self.get_infected(is_dormant=True):
+		for infected in self.filter_population(is_dormant=True):
 			infected.is_dormant = False
-			infections.append(infected)
+			new_infections.append(infected)
+
+		print(f"   new cases: {len(new_infections)}")
+		print(f"  new deaths: {len(new_deaths)}")
+		print(f" total alive: {len(self.filter_population(is_alive=True))}")
+		print(f"total deaths: {len(self.filter_population(is_alive=False))}")
+		print(f"total immune: {len(self.filter_population(is_vaccinated=True))}")
+		print()
 
 		# XXX TODO XXX
 		# Log the number of deaths and infections somewhere.
 
-	def get_alive(self):
-		'''Gets everyone in the population that is still alive, and returns them.'''
-		return [p for p in self.population if p.is_alive]
+	def filter_population(
+		self,
+		is_alive: bool | None = None,
+		is_vaccinated: bool | None = None,
+		is_infected: bool | None = None,
+		is_dormant: bool | None = None,
+	):
+		'''
+		Filters the population based on several flags, which can be combined.
+		- `None` indicates no filter should be applied.
+		- `True` or `False` indicates only the matching population should be gathered.
+		- The `is_dormant` option also filters out healthy people, unless it is `None`.
 
-	def get_infected(self, is_dormant: bool | None = None):
-		'''Gets all the infected people from the population and returns them as a list.'''
-		infected_population = [p for p in self.population if p.is_infected]
-		if is_dormant is None:
-			return infected_population
-		else:
-			return [p for p in infected_population if p.is_dormant == is_dormant]
+		If you need more advanced filter options (such as those using `or` conditionals),
+		then this won't do -- you'd have to make your own logic off of `self.population`.
+		'''
+
+		# Get the population.
+		filtered_population = self.population
+
+		# Filter for living (or dead) people.
+		if is_alive != None:
+			filtered_population = [
+				person for person in filtered_population
+				if person.is_alive == is_alive
+			]
+
+		# Filter for (un)vaccinated people.
+		if is_vaccinated != None:
+			filtered_population = [
+				person for person in filtered_population
+				if person.is_vaccinated == is_vaccinated
+			]
+
+		# Filter for infected (or healthy) people.
+		if is_infected != None:
+			filtered_population = [
+				person for person in filtered_population
+				if person.is_infected == is_infected
+			]
+
+		# Filter for dormant (or active) infections only.
+		if is_dormant != None:
+			filtered_population = [
+				person for person in filtered_population
+				if person.is_infected == True
+				and person.is_dormant == is_dormant
+			]
+
+		# Return the result.
+		return filtered_population
 
 ##################
 # CLI Entrypoint #
